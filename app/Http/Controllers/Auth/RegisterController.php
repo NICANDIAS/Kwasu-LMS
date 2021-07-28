@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/signUp';
 
     /**
      * Create a new controller instance.
@@ -49,11 +49,13 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $message = ['email.regex' => 'Only Kwasu email is allowed'];
+
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users','regex:/kwasu.edu.ng/'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        ], $message);
     }
 
     /**

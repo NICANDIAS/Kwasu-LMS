@@ -1,6 +1,8 @@
 <?php
 
+use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +20,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/', 'homeController@index');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::match(['post','get'],'signUp', 'signUpsController@create');
+Route::match(['post','get'],'application', 'LeaveController@index');
