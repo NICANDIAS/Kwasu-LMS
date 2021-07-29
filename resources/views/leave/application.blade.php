@@ -15,7 +15,7 @@
                         {{ Form::label('leave type', 'LEAVE TYPE :',['class' => 'col-sm-3 col-form-label']) }}   
                         <div class="col-sm-8">
                             {{-- @foreach($leave_t as $leaveType) --}}
-                            {{ Form::select('leaveType',['Select Leave Type'],'',['class' => 'form-control m-b']) }}
+                            {{ Form::select('leaveType',['Select Leave Type'] + $leave_t->all(),'',['class' => 'form-control m-b']) }}
                             {{-- @endforeach --}}
                         </div>
                     </div>
@@ -50,11 +50,11 @@
             </div>
         </div>
     </div> --}}
-    {{-- @if(count($all_l) > 0) --}}
+    @if(count($all_l) > 0)
         <div class="col-lg-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">LEAVE DEPARTMENTS</h3>
+                    <h3 class="panel-title" style="text-align:center;">APPLIED LEAVE</h3>
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
@@ -63,12 +63,14 @@
                                 <tr>
                                     <th>S/N</th>
                                     <th>Leave Type</th>
-                                    <th>Leave Start</th>
-                                    <th>Leave End</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
                                     <th>Leave Days</th>
                                     <th>Discription</th>
                                     <th>Posting Date</th>
                                     <th>Hod Remark</th>
+                                    <th>Provost Remark</th>
+                                    <th>Registry Remark</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                     <th>Print</th>
@@ -76,36 +78,40 @@
                             </thead>
                             <tbody>
                                 <?php $s = 1 ?>
-                                {{-- @foreach($all_l as $allLeave) --}}
+                                @foreach($all_l as $allLeave)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Study Leave</td>
-                                    <td>May 2020</td>
-                                    <td>May 2021</td>
-                                    <td>365</td>
-                                    <td>Going for masters</td>
-                                    <td>Today<br>10:28</td>
-                                    <td></td>                            
-                                    <td>Applied</td>
-                                    {{-- @if($allLeave->application_status != 'Applied')  --}}
-                                        {{-- <td>{{"Cant be Edited"}}</td> --}}
-                                    {{-- @else  --}}
+                                    <td>{{$s++}}</td>
+                                    <td>{{$allLeave->leave_type}}</td>
+                                    <td>{{$allLeave->start_date}}</td>
+                                    <td>{{$allLeave->end_date}}</td>
+                                    <td>{{$allLeave->leave_days}}</td>
+                                    <td>{{$allLeave->leave_description}}</td>
+                                    <td>{{$allLeave->posting_date}}<br>10:28</td>
+                                    <td>{{$allLeave->hod_remark}}</td>
+                                    <td>{{$allLeave->provost_remark}}</td>
+                                    <td>{{$allLeave->registry_remark}}</td>                          
+                                    <td>{{$allLeave->application_status}}</td>
+                                    @if($allLeave->application_status != 'Applied') 
+                                        <td>{{"Cant be Edited"}}</td>
+                                    @else 
                                         <td><a class="btn btn-primary" onclick="return confirm('Are you sure you want to update?')" href="#">Edit</a> | <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this leave application?')" href="#">Delete</a></td>
-                                    {{-- @endif  --}}
+                                    @endif 
                                     <td><a class="btn btn-primary" href="#">Print</a></td>
                                 </tr>
-                                {{-- @endforeach --}}
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>S/N</th>
                                     <th>Leave Type</th>
-                                    <th>Leave Start</th>
-                                    <th>Leave End</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
                                     <th>Leave Days</th>
                                     <th>Discription</th>
                                     <th>Posting Date</th>
-                                    <th>Admin Remark</th>
+                                    <th>Hod Remark</th>
+                                    <th>Provost Remark</th>
+                                    <th>Registry Remark</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                     <th>Print</th>
@@ -116,7 +122,7 @@
                 </div>
             </div>
         </div>
-    {{-- @endif --}}
+    @endif
 </div>
 
 <!-- Mainly scripts -->

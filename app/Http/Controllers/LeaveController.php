@@ -23,24 +23,24 @@ class LeaveController extends Controller
 
         if($request->isMethod('POST')){
             $all_leave = new allLeave;
-            $all_leave->employee_id = $user;
+            $all_leave->staff_id = $user;
             $all_leave->department = $department;
             $all_leave->leave_type = $request->input('leaveType');
-            $all_leave->date_from = $request->input('dateFrom');
+            $all_leave->start_date = $request->input('dateFrom');
                 $leaveDays = leaveType::all()->where('leave_type','=',$all_leave->leave_type)->pluck('leave_days');
                 $leaveDays = empty($leaveDays[0]) ? 0 :  $leaveDays[0];
             $all_leave->leave_days = $leaveDays;
             $newTime = date('d-m-Y', (strtotime($all_leave->date_from.' + '.$leaveDays.' days')));
             $newDate = date('Y-m-d', strtotime($newTime));
-            $all_leave->date_to = $newDate;
+            $all_leave->end_date = $newDate;
             $all_leave->default_days = $leaveDays;
             $all_leave->days_applied_for = $leaveDays;
-            $all_leave->description = $request->input('description');
+            $all_leave->leave_description = $request->input('description');
             $all_leave->save();
         }
         
         $leaveType = leaveType::pluck('leave_type','leave_type');
-        $allLeave = allLeave::all()->where('employee_id','=',$user);
+        $allLeave = allLeave::all()->where('staff_id','=',$user);
 
         return view('leave.application', ['leave_t' => $leaveType, 'all_l' => $allLeave]);
     }
@@ -72,9 +72,14 @@ class LeaveController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        //Displaying the details of all the Leave applied for
+        $allLeave = allLeave::all();
+        $department = allLeave::all()->pluck('department');
+        $noOfStaffInDepartment = allLeave::where('department',$department)->count();
+
+        return view('leave.allLeave', ['all_l' => $allLeave, 'number' => $noOfStaffInDepartment]);
     }
 
     /**
@@ -109,5 +114,83 @@ class LeaveController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function applied(){
+        $user = Auth::user()->name;
+        $linkUser = allLeave::where('staff_id','=',$user)->pluck("department")->first();
+        $allLeave = allLeave::all()->where('department','=', $linkUser);
+    
+        return view('leave.applied', ['all_l' => $allLeave, 'linkUsers' => $linkUser]);
+    }
+
+    public function approval(Request $request, $id) {
+        //Approval page
+        if($request->isMethod('POST')){
+            switch ($request->input('submitButton')){
+                case 'HOD APPROVE':
+                    //HOD Approval
+                    $allLeave = allLeave::find($id);
+                    $allLeave->hod_remark = $request->input('hodRemark');
+                    $allLeave->save();
+
+                    // if (Employee::where('employee_id',"{$employee_id}")->pluck('employee_category')->first() == 'Non-Teaching') {
+                    //     allLeave::where('employee_id',"{$employee_id}")->update(['application_status' => 'PROVOST has approved']);
+                    // }else
+                    allLeave::where('id',"{$id}")->update(['application_status' => 'HOD has Approved']);
+                    return redirect('applied');
+                break;
+
+                case 'HOD DECLINE':
+                    //HOD Decline
+                    //Employee::find($employee_id);
+                    $allLeave = allLeave::find($id);
+                    $allLeave->hod_remark = $request->input('hodRemark');
+                    $allLeave->save();
+
+                    // if (Employee::where('employee_id',"{$employee_id}")->pluck('employee_category')->first() == 'Non-Teaching') {
+                    //     allLeave::where('employee_id',"{$employee_id}")->update(['application_status' => 'HOD has declined']);
+                    // }else
+                    allLeave::where('id',"{$id}")->update(['application_status' => 'HOD has declined']);
+                    return redirect('applied');
+                break;
+
+                case 'PROVOST APPROVE':
+                    //Provost approval
+                    $allLeave = allLeave::find($id);
+                    $allLeave->provost_remark = $request->input('provostRemark');
+                    $allLeave->save();
+
+                    allLeave::where('id',"{$id}")->update(['application_status' => 'PROVOST has approved']);
+                    return redirect('applied');
+                break;
+
+                case 'PROVOST DECLINE':
+                    //Provost Declined
+                    $allLeave = allLeave::find($id);
+                    $allLeave->provost_remark = $request->input('provostRemark');
+                    $allLeave->save();
+
+                    allLeave::where('id',"{$id}")->update(['application_status' => 'PROVOST has declined']);
+                    return redirect('applied');
+                break;
+
+                case 'REGISTRY APPROVE':
+                    //Registry approval
+                    allLeave::where('id',"{$id}")->update(['application_status' => 'REGISTRY has approved']);
+
+                    return redirect('applied');
+                break;
+
+                case 'REGISTRY DECLINE':
+                    //Registry Declined
+                    allLeave::where('id',"{$id}")->update(['application_status' => 'REGISTRY has declined']);
+
+                    return redirect('applied');
+                break;
+            }
+        }
+        $allLeave = allLeave::find($id);
+        return view('leave/approval')->with('all_l',$allLeave);
     }
 }

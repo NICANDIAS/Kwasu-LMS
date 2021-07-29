@@ -88,9 +88,9 @@
     </main>
 </div>
     
-    {{-- @include('inc.footer')
+    @include('inc.footer')
     @include('inc.lower-script')
-    @include('inc.footer-script') --}}
+    @include('inc.footer-script')
     </div>
 </body>
 </html>
