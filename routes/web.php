@@ -28,3 +28,5 @@ Route::match(['post','get'],'application', 'LeaveController@index');
 Route::get('allLeave', 'LeaveController@show');
 Route::match(['post','get'],'applied', 'LeaveController@applied');
 Route::match(['post','get'],'approval/{id}', 'LeaveController@approval');
+Route::get('approved', 'LeaveController@getApprovedLeave');
+Route::match(['post','get'], 'editApplication/{id}/', 'LeaveController@edit');

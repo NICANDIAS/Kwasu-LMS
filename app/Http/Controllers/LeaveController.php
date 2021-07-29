@@ -88,9 +88,30 @@ class LeaveController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        //Edit Application
+        if($request->isMethod('POST')){
+
+            $all_leave = allLeave::find($id);
+            $all_leave->leave_type = $request->input('leaveType');
+            $all_leave->date_from = $request->input('dateFrom');
+                $leaveDays = leaveType::all()->where('leave_type','=',$all_leave->leave_type)->pluck('leave_days');
+                $leaveDays = empty($leaveDays[0]) ? 0 :  $leaveDays[0];
+            $all_leave->leave_days = $leaveDays;
+            $newTime = date('d-m-Y', (strtotime($all_leave->date_from.' + '.$leaveDays.' days')));
+            $newDate = date('Y-m-d', strtotime($newTime));
+            $all_leave->date_to = $newDate;
+            $all_leave->description = $request->input('description');
+            $all_leave->save();
+
+            return redirect('application');
+        }
+
+        $applications = allLeave::find($id);
+        $leaveType = leaveType::pluck('leave_type','leave_type');
+
+        return view('leave.editApplication', ['application' => $applications, 'leave_t' => $leaveType,]);
     }
 
     /**
@@ -192,5 +213,10 @@ class LeaveController extends Controller
         }
         $allLeave = allLeave::find($id);
         return view('leave/approval')->with('all_l',$allLeave);
+    }
+
+    public function getApprovedLeave (){
+
+        return view('leave.approved');
     }
 }

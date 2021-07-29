@@ -35,7 +35,7 @@
                         <a href="{{ url('/applied') }}"><i class="fa fa-user"></i> <span class="nav-label">Applied</span></a>
                     </li>
                     <li class="active">
-                        <a href="{{ url('/newPatient') }}"><i class="fa fa-user"></i> <span class="nav-label">New Patient</span></a>
+                        <a href="{{ url('/approved') }}"><i class="fa fa-user"></i> <span class="nav-label">Approved Leaves</span></a>
                     </li>
                     <li class="active">
                         <a href="{{ url('/existingPatient') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Existing Patient</span></a>

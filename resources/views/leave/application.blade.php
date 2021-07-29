@@ -94,7 +94,7 @@
                                     @if($allLeave->application_status != 'Applied') 
                                         <td>{{"Cant be Edited"}}</td>
                                     @else 
-                                        <td><a class="btn btn-primary" onclick="return confirm('Are you sure you want to update?')" href="#">Edit</a> | <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this leave application?')" href="#">Delete</a></td>
+                                        <td><a class="btn btn-primary" onclick="return confirm('Are you sure you want to update?')" href="editApplication/{{$allLeave->id}}">Edit</a> | <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this leave application?')" href="application/{{$allLeave->id}}">Delete</a></td>
                                     @endif 
                                     <td><a class="btn btn-primary" href="#">Print</a></td>
                                 </tr>
