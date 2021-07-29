@@ -33,6 +33,8 @@ Route::match(['post','get'], 'editApplication/{id}/', 'LeaveController@edit');
 
 //Leave Faculty
 Route::match(['post','get'], 'faculty', 'FacultyController@create');
+Route::match(['post','get'], 'editFaculty/{id}/edit', 'FacultyController@edit');
+Route::match(['post','get'], 'deleteFaculty/{id}/delete', 'FacultyController@destroy');
 
 //Leave Department
 Route::match(['post','get'], 'department', 'DepartmentController@create');

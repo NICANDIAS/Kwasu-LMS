@@ -68,9 +68,19 @@ class FacultyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        //Edit Faculty
+        if($request->isMethod('POST')){
+            $leave_Department = Faculty::find($id);
+            $leave_Department->faculty = $request->input('faculty');
+            $leave_Department->faculty_short_code = $request->input('facultyShortCode');
+            $leave_Department->save();
+
+            return redirect('/faculty');
+        }
+        $faculty = Faculty::find($id);
+        return view('leave/editFaculty', ['faculty' => $faculty]);
     }
 
     /**
@@ -93,6 +103,10 @@ class FacultyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Delete leave-department
+        $faculty = Faculty::find($id);
+        $faculty->delete();
+
+        return redirect('/faculty')->with('leave_d', $faculty);
     }
 }

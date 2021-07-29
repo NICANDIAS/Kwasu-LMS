@@ -5,26 +5,20 @@
     <div class="col-lg-8">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">ADD LEAVE DEPARTMENT</h3>
+                <h3 class="panel-title" style="text-align: center">EDIT Faculty</h3>
             </div>
             <div class="panel-body">
-                {{ Form::open(array('action' => ['LeavesController@editLeaveDepartment', $leave_d->id], 'method' => 'POST'))}}
+                {{ Form::open(array('action' => ['FacultyController@edit', $faculty->id], 'method' => 'POST'))}}
                     <div class="form-group row">
-                        {{ Form::label('Department Name', 'Department Name :',['class' => 'col-sm-3 col-form-label']) }}   
+                        {{ Form::label('faculty', 'Faculty Name :',['class' => 'col-sm-3 col-form-label']) }}   
                         <div class="col-sm-8">
-                            {{ Form::text('departmentName', $leave_d->department_name, ['class' => 'form-control','placeholder' =>'Department Name']) }}
+                            {{ Form::text('faculty', '', ['class' => 'form-control','placeholder' => $faculty->faculty]) }}
                         </div>
                     </div>
                     <div class="form-group row">
-                        {{ Form::label('Departmrnt Short Name', 'Department Short Code :',['class' => 'col-sm-3 col-form-label']) }}   
+                        {{ Form::label('facultyShortCode', 'Faculty Short Code :',['class' => 'col-sm-3 col-form-label']) }}   
                         <div class="col-sm-8">
-                            {{ Form::text('departmentShortName', $leave_d->department_short_code, ['class' => 'form-control','placeholder' =>'Department Short Code']) }}
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        {{ Form::label('Department Code', 'Department Code :',['class' => 'col-sm-3 col-form-label']) }}   
-                        <div class="col-sm-8">
-                            {{ Form::text('departmentCode', $leave_d->department_code, ['class' => 'form-control','placeholder' =>'Department Code']) }}
+                            {{ Form::text('facultyShortCode', '', ['class' => 'form-control','placeholder' => $faculty->faculty_short_code]) }}
                         </div>
                     </div>
                     <div style="text-align:center;">

@@ -55,7 +55,7 @@
                                         <td>{{$faculty->faculty_short_code}}</td>
                                         <td>{{$faculty->created_at}}</td>
                                         <td>{{$faculty->updated_at}}</td>
-                                        <td><a class="btn btn-primary" href="editLeaveDepartment/{{$faculty->id}}/edit">Edit</a> | <a class="btn btn-danger" href="deleteLeaveDepartment/{{$faculty->id}}/delete">Delete</a></td>
+                                        <td><a class="btn btn-primary" href="editFaculty/{{$faculty->id}}/edit" onclick="return confirm('Are you sure you want to edit this Faculty')">Edit</a> | <a class="btn btn-danger" href="deleteFaculty/{{$faculty->id}}/delete" onclick="return confirm('Are you sure you want to edit this Faculty')">Delete</a></td>
                                     </tr>
                                 </tbody>
                             @endforeach
