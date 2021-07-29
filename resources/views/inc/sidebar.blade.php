@@ -24,7 +24,10 @@
                 </li>
                 {{-- @if (Auth::user()->cadre == 'Patient') --}}
                     <li class="active">
-                        <a href="{{ url('/patient') }}"><i class="fa fa-user"></i> <span class="nav-label">Details</span></a>
+                        <a href="{{ url('/application') }}"><i class="fa fa-user"></i> <span class="nav-label">Application</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="{{ url('/signUp') }}"><i class="fa fa-user"></i> <span class="nav-label">signUp</span></a>
                     </li>
                 {{-- @endif --}}
                 {{-- @if (Auth::user()->cadre == 'Doctor') --}}
@@ -38,7 +41,13 @@
                         <a href="{{ url('/approved') }}"><i class="fa fa-user"></i> <span class="nav-label">Approved Leaves</span></a>
                     </li>
                     <li class="active">
-                        <a href="{{ url('/existingPatient') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Existing Patient</span></a>
+                        <a href="{{ url('/faculty') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Add Faculty</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="{{ url('/department') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Add Department</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="{{ url('/unit') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Add Unit</span></a>
                     </li>
                 {{-- @endif --}}
             </ul>

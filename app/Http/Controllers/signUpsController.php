@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Employee;
 use App\Models\allLeave;
 use App\Models\NextOfKin;
+use App\Models\Unit;
 use carbon\Carbon;
 
 class signUpsController extends Controller
@@ -76,9 +77,9 @@ class signUpsController extends Controller
 
                 return redirect('/application');
             }
-                
         }
-        return view ('leave.signUp', ['user' => $user]);
+        $unit = Unit::pluck('unit','unit');
+        return view ('leave.signUp', ['user' => $user, 'unit' => $unit]);
     }
 
     /**

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Faculty;
+use App\Models\Department;
+use App\Models\Unit;
 
 class DepartmentController extends Controller
 {
@@ -13,7 +16,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('leave/Department');
     }
 
     /**
@@ -21,9 +24,22 @@ class DepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        //create leave-Department
+        if(Department::where('department',$request->input('departmentName'))->first()){
+            return redirect()->back();
+        }else {
+            if($request->isMethod('POST')){
+                $leave_Department = new Department;
+                $leave_Department->faculty_id = $request->input('faculty');
+                $leave_Department->department = $request->input('departmentName');
+                $leave_Department->save();
+            }
+            $faculty = Faculty::pluck('faculty','id');
+            $leave_departments = Department::all();
+            return view('leave/Department', ['leave_d' => $leave_departments, 'faculty' => $faculty]);
+        }
     }
 
     /**
@@ -54,9 +70,20 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        //Edit leave-department
+        if($request->isMethod('POST')){
+            $leave_Department = Department::find($id);
+            $leave_Department->faculty_id = $request->input('faculty');
+            $leave_Department->department = $request->input('departmentName');
+            $leave_Department->save();
+
+            return redirect('/department');
+        }
+        $faculty = Faculty::pluck('faculty','id');
+        $leave_departments = Department::find($id);
+        return view('leave/editDepartment', ['leave_d' => $leave_departments, 'faculty' => $faculty]);
     }
 
     /**
@@ -77,8 +104,12 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        //Delete leave-department
+        $leave_departments = Department::find($id);
+        $leave_departments->delete();
+
+        return redirect('/department')->with('leave_d', $leave_departments);
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Faculty;
+
 
 class FacultyController extends Controller
 {
@@ -13,7 +15,7 @@ class FacultyController extends Controller
      */
     public function index()
     {
-        //
+        return view('leave/faculty');
     }
 
     /**
@@ -21,9 +23,21 @@ class FacultyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        //create new Faculty
+        if(Faculty::where('faculty',$request->input('faculty'))->first()){
+            return redirect()->back();
+        }else {
+            if($request->isMethod('POST')){
+                $leave_Department = new Faculty;
+                $leave_Department->faculty = $request->input('faculty');
+                $leave_Department->faculty_short_code = $request->input('facultyShortCode');
+                $leave_Department->save();
+            }
+            $faculty = Faculty::all();
+            return view('leave/faculty', ['faculty' => $faculty]);
+        } 
     }
 
     /**

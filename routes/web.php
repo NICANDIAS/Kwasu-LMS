@@ -30,3 +30,14 @@ Route::match(['post','get'],'applied', 'LeaveController@applied');
 Route::match(['post','get'],'approval/{id}', 'LeaveController@approval');
 Route::get('approved', 'LeaveController@getApprovedLeave');
 Route::match(['post','get'], 'editApplication/{id}/', 'LeaveController@edit');
+
+//Leave Faculty
+Route::match(['post','get'], 'faculty', 'FacultyController@create');
+
+//Leave Department
+Route::match(['post','get'], 'department', 'DepartmentController@create');
+Route::match(['post','get'], 'editDepartment/{id}/edit', 'DepartmentController@edit');
+Route::match(['post','get'], 'deleteDepartment/{id}/delete', 'DepartmentController@destroy');
+
+//Leave Unit
+Route::match(['post','get'], 'unit', 'UnitController@create');

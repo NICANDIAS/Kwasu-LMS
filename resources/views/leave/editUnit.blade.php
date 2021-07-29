@@ -1,30 +1,30 @@
-@extends ('layouts.app-auth')
+@extends ('layouts.app')
 @section('content')
 
 <div class="wrapper wrapper-content">
-    <div class="col-sm-8">
+    <div class="col-lg-8">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">LEAVE APPLICATION</h3>
+                <h3 class="panel-title">ADD LEAVE DEPARTMENT</h3>
             </div>
             <div class="panel-body">
-                {{ Form::open(array('action' => ['LeaveController@edit', $application->id], 'method' => 'POST'))}}
+                {{ Form::open(array('action' => ['LeavesController@editLeaveDepartment', $leave_d->id], 'method' => 'POST'))}}
                     <div class="form-group row">
-                        {{ Form::label('leave type', 'LEAVE TYPE :',['class' => 'col-sm-3 col-form-label']) }}   
+                        {{ Form::label('Department Name', 'Department Name :',['class' => 'col-sm-3 col-form-label']) }}   
                         <div class="col-sm-8">
-                            {{ Form::select('leaveType',['Select Leave Type'] + $leave_t->all(),'',['class' => 'form-control m-b']) }}
+                            {{ Form::text('departmentName', $leave_d->department_name, ['class' => 'form-control','placeholder' =>'Department Name']) }}
                         </div>
                     </div>
                     <div class="form-group row">
-                        {{ Form::label('date from', 'DATE FROM :',['class' => 'col-sm-3 col-form-label']) }}   
+                        {{ Form::label('Departmrnt Short Name', 'Department Short Code :',['class' => 'col-sm-3 col-form-label']) }}   
                         <div class="col-sm-8">
-                            {{ Form::date('dateFrom', '', ['class' => 'form-control','placeholder' =>'DATE FROM', 'required' => 'required']) }}
+                            {{ Form::text('departmentShortName', $leave_d->department_short_code, ['class' => 'form-control','placeholder' =>'Department Short Code']) }}
                         </div>
                     </div>
                     <div class="form-group row">
-                        {{ Form::label('discription', 'DISCRIPTION :',['class' => 'col-sm-3 col-form-label']) }}   
+                        {{ Form::label('Department Code', 'Department Code :',['class' => 'col-sm-3 col-form-label']) }}   
                         <div class="col-sm-8">
-                            {{ Form::textarea('description', $application->leave_description, ['class' => 'form-control','placeholder' =>'DISCRIPTION', 'row' => '4', 'cols' => '30', 'required' => 'required']) }}
+                            {{ Form::text('departmentCode', $leave_d->department_code, ['class' => 'form-control','placeholder' =>'Department Code']) }}
                         </div>
                     </div>
                     <div style="text-align:center;">
@@ -34,19 +34,8 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-4">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">LEAVE DAYS</h3>
-            </div>
-            <div class="panel-body">
-                <div class="form-group row">   
-                    <div class="col-sm-4"><span style="font-size:80px;">30Days</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
+
 
 <!-- Mainly scripts -->
 <script src="js/jquery-2.1.1.js"></script>
@@ -89,18 +78,5 @@
 
         });
 
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('select').on('change', function () {
-                $.ajax({
-                    url: '{{ url('get-leave-days') }}/' + $(this).val(),
-                    method: 'GET',
-                    success: function(res) {
-                        $('.leave-days').text(res.data.days)
-                    }
-                });
-            });
-        });
     </script>
 @endsection

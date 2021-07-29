@@ -1,4 +1,4 @@
-@extends ('layouts.app-auth')
+@extends ('layouts.app')
 @section('content')
 
 <div class="wrapper wrapper-content">
@@ -74,9 +74,9 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
-                                            {{ Form::label('center', 'Center:',['class' => 'col-sm-4 control-label']) }}   
+                                            {{ Form::label('unit', 'Unit:',['class' => 'col-sm-4 control-label']) }}   
                                             <div class="col-sm-8">
-                                                {{ Form::select('center', array('' => 'Select', 'Registry' => 'Registry', 'CIITR' => 'Center For Innovative and Information Technology Resources', 'CCD' => 'Center for Community Development', 'Bursary' => 'Bursary'), '', ['class' => 'form-control m-b']) }}
+                                                {{ Form::select('unit',['Select Unit'] + $unit->all(),'', ['class' => 'form-control m-b']) }}
                                             </div>
                                         </div>
                                     </div>
@@ -258,22 +258,22 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     {{ Form::label('Nrelationship', 'RELATIONSHIP :',['class' => 'col-sm-4 control-label']) }}   
                                     <div class="col-sm-8">
                                         {{ Form::select('Nrelationship', array('' => 'Select', 'father' => 'Father', 'mother' => 'Mother'), '', ['class' => 'form-control m-b','required' => 'required']) }}
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    {{ Form::label('Nemail', 'EMAIL :', ['class' => 'col-sm-4 control-label']) }}
-                                    <div class="col-sm-8">
-                                        {{ Form::text('Nemail', '', ['class' => 'form-control','id' => 'inputEmail3','placeholder' =>'Email','required' => 'required']) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     {{ Form::label('NphoneNumber', 'PHONE NUMBER :', ['class' => 'col-sm-4 control-label']) }}
                                     <div class="col-sm-8">
                                         {{ Form::text('NphoneNumber', '', ['class' => 'form-control','id' => 'inputEmail3','placeholder' =>'Phone Number','required' => 'required']) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    {{ Form::label('Nemail', 'EMAIL :', ['class' => 'col-sm-2 control-label']) }}
+                                    <div class="col-sm-10">
+                                        {{ Form::text('Nemail', '', ['class' => 'form-control','id' => 'inputEmail3','placeholder' =>'Email','required' => 'required']) }}
                                     </div>
                                 </div>
                             </div>

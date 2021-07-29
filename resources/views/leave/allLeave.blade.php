@@ -1,4 +1,4 @@
-@extends ('layouts.app')
+@extends ('layouts.app-auth')
 @section('content')
 @if(count($all_l) > 0)
     <div class="wrapper wrapper-content">

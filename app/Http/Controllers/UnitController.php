@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Unit;
 
 class UnitController extends Controller
 {
@@ -13,7 +14,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        //
+        return view('leave/faculty');
     }
 
     /**
@@ -21,9 +22,21 @@ class UnitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        //create new Unit
+        if(Unit::where('unit',$request->input('unit'))->first()){
+            return redirect()->back();
+        }else {
+            if($request->isMethod('POST')){
+                $leave_Department = new Unit;
+                $leave_Department->unit = $request->input('unit');
+                $leave_Department->unit_short_code = $request->input('unitShortName');
+                $leave_Department->save();
+            }
+            $unit = Unit::all();
+            return view('leave/unit', ['unit' => $unit]);
+        } 
     }
 
     /**
