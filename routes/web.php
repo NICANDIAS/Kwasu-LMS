@@ -43,3 +43,5 @@ Route::match(['post','get'], 'deleteDepartment/{id}/delete', 'DepartmentControll
 
 //Leave Unit
 Route::match(['post','get'], 'unit', 'UnitController@create');
+Route::match(['post','get'], 'editUnit/{id}/edit', 'UnitController@edit');
+Route::match(['post','get'], 'deleteUnit/{id}/delete', 'UnitController@destroy');

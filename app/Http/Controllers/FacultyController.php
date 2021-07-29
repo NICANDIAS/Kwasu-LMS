@@ -72,10 +72,10 @@ class FacultyController extends Controller
     {
         //Edit Faculty
         if($request->isMethod('POST')){
-            $leave_Department = Faculty::find($id);
-            $leave_Department->faculty = $request->input('faculty');
-            $leave_Department->faculty_short_code = $request->input('facultyShortCode');
-            $leave_Department->save();
+            $faculty = Faculty::find($id);
+            $faculty->faculty = $request->input('faculty');
+            $faculty->faculty_short_code = $request->input('facultyShortCode');
+            $faculty->save();
 
             return redirect('/faculty');
         }
@@ -103,7 +103,7 @@ class FacultyController extends Controller
      */
     public function destroy($id)
     {
-        //Delete leave-department
+        //Delete Faculty
         $faculty = Faculty::find($id);
         $faculty->delete();
 

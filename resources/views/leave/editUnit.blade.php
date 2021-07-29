@@ -8,25 +8,19 @@
                 <h3 class="panel-title">ADD LEAVE DEPARTMENT</h3>
             </div>
             <div class="panel-body">
-                {{ Form::open(array('action' => ['LeavesController@editLeaveDepartment', $leave_d->id], 'method' => 'POST'))}}
-                    <div class="form-group row">
-                        {{ Form::label('Department Name', 'Department Name :',['class' => 'col-sm-3 col-form-label']) }}   
-                        <div class="col-sm-8">
-                            {{ Form::text('departmentName', $leave_d->department_name, ['class' => 'form-control','placeholder' =>'Department Name']) }}
-                        </div>
+                {{ Form::open(array('action' => ['UnitController@edit', $unit->id], 'method' => 'POST'))}}
+                <div class="form-group row">
+                    {{ Form::label('unit', 'Unit Name :',['class' => 'col-sm-3 col-form-label']) }}   
+                    <div class="col-sm-8">
+                        {{ Form::text('unit', '', ['class' => 'form-control','placeholder' => $unit->unit]) }}
                     </div>
-                    <div class="form-group row">
-                        {{ Form::label('Departmrnt Short Name', 'Department Short Code :',['class' => 'col-sm-3 col-form-label']) }}   
-                        <div class="col-sm-8">
-                            {{ Form::text('departmentShortName', $leave_d->department_short_code, ['class' => 'form-control','placeholder' =>'Department Short Code']) }}
-                        </div>
+                </div>
+                <div class="form-group row">
+                    {{ Form::label('unitShortName', 'Unit Short Code :',['class' => 'col-sm-3 col-form-label']) }}   
+                    <div class="col-sm-8">
+                        {{ Form::text('unitShortName', '', ['class' => 'form-control','placeholder' => $unit->unit_short_code]) }}
                     </div>
-                    <div class="form-group row">
-                        {{ Form::label('Department Code', 'Department Code :',['class' => 'col-sm-3 col-form-label']) }}   
-                        <div class="col-sm-8">
-                            {{ Form::text('departmentCode', $leave_d->department_code, ['class' => 'form-control','placeholder' =>'Department Code']) }}
-                        </div>
-                    </div>
+                </div>
                     <div style="text-align:center;">
                         {{ Form::submit('SAVE', ['class'=>'btn btn-sm btn-primary m-t-n-xs']) }}
                     </div>

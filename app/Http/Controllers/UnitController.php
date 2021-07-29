@@ -67,9 +67,19 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        //Edit Faculty
+        if($request->isMethod('POST')){
+            $unit = Unit::find($id);
+            $unit->unit = $request->input('unit');
+            $unit->unit_short_code = $request->input('unitShortName');
+            $unit->save();
+
+            return redirect('/unit');
+        }
+        $unit = Unit::find($id);
+        return view('leave/editUnit', ['unit' => $unit]);
     }
 
     /**
@@ -92,6 +102,10 @@ class UnitController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Delete Faculty
+        $unit = Unit::find($id);
+        $unit->delete();
+
+        return redirect('/unit')->with('leave_d', $unit);
     }
 }

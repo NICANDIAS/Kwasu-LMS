@@ -55,7 +55,7 @@
                                         <td>{{$unit->unit_short_code}}</td>
                                         <td>{{$unit->created_at}}</td>
                                         <td>{{$unit->updated_at}}</td>
-                                        <td><a class="btn btn-primary" href="editLeaveDepartment/{{$unit->id}}/edit">Edit</a> | <a class="btn btn-danger" href="deleteLeaveDepartment/{{$unit->id}}/delete">Delete</a></td>
+                                        <td><a class="btn btn-primary" href="editUnit/{{$unit->id}}/edit" onclick="return confirm('Are you sure you want to edit this Unit?')">Edit</a> | <a class="btn btn-danger" href="deleteUnit/{{$unit->id}}/delete" onclick="return confirm('Are you sure you want to delete this Unit?')">Delete</a></td>
                                     </tr>
                                 </tbody>
                             @endforeach
