@@ -50,3 +50,6 @@ Route::match(['post','get'], 'deleteUnit/{id}/delete', 'UnitController@destroy')
 Route::match(['post','get'], 'leaveType', 'leaveTypeController@create');
 Route::match(['post','get'], 'editLeaveType/{id}/edit', 'leaveTypeController@edit');
 Route::match(['post','get'], 'leaveType/{id}/delete', 'leaveTypeController@destroy');
+
+//Leave View Details
+Route::get('leaveViewDetails/{employee_id}/{id}', 'LeaveController@getleaveViewDetails');

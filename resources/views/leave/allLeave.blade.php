@@ -92,7 +92,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                <a href="leaveViewDetails/{{$allLeave->employee_id}}/{{$allLeave->id}}" class="btn btn-primary">View Details</a>
+                                <a href="leaveViewDetails/{{$allLeave->staff_id}}/{{$allLeave->id}}" class="btn btn-primary">View Details</a>
                                 </td>
                             </tr>
                             @endforeach

@@ -220,4 +220,12 @@ class LeaveController extends Controller
         return view('leave.approved');
     }
 
+    public function getleaveViewDetails($staff_id,$id){
+        //view applicant details 
+        $employee = Employee::whereStaff_id($staff_id)->first();
+        $leave = allLeave::where('id',"{$id}")->first();
+        $leaves = allLeave::all()->where('staff_id',"{$staff_id}");
+
+        return view('leave.leaveViewDetails', ['emp' => $employee, 'leave' => $leave, 'leave_details' => $leaves]);
+    }
 }
