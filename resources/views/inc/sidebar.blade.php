@@ -29,6 +29,9 @@
                     <li class="active">
                         <a href="{{ url('/signUp') }}"><i class="fa fa-user"></i> <span class="nav-label">signUp</span></a>
                     </li>
+                    <li class="active">
+                        <a href="{{ url('/search') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Search</span></a>
+                    </li>
                 {{-- @endif --}}
                 {{-- @if (Auth::user()->cadre == 'Doctor') --}}
                     <li class="active">

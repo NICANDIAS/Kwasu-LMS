@@ -99,9 +99,20 @@ class signUpsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        //view applicant details 
+        if($request->isMethod('POST')){
+            $empSearch = $request->input('search');
+            if(Employee::where('staff_id','=', $empSearch)->exists()) {
+                $employee = Employee::whereStaff_id($empSearch)->first();
+                $leave = allLeave::where('staff_id',"{$empSearch}")->first();
+                $leaves = allLeave::all()->where('staff_id',"{$empSearch}");
+                
+                return view('leave.leaveViewDetails', ['emp' => $employee, 'leave' => $leave, 'leave_details' => $leaves]);
+            }else return redirect()->back();
+        }
+        return view ('leave.search');
     }
 
     /**

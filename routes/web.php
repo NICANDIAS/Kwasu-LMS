@@ -53,3 +53,5 @@ Route::match(['post','get'], 'leaveType/{id}/delete', 'leaveTypeController@destr
 
 //Leave View Details
 Route::get('leaveViewDetails/{employee_id}/{id}', 'LeaveController@getleaveViewDetails');
+
+Route::match(['post','get'],'search', 'signUpsController@show');
