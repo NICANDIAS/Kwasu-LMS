@@ -219,4 +219,5 @@ class LeaveController extends Controller
 
         return view('leave.approved');
     }
+
 }
