@@ -64,7 +64,7 @@
                                         <div class="col-lg-4">
                                             {{ Form::label('faculty', 'Faculty:',['class' => 'col-sm-4 control-label']) }}   
                                             <div class="col-sm-8">
-                                                {{ Form::select('faculty', array('' => 'Select', 'Agriculture' => 'Agriculture', 'Education' => 'Education', 'Engineering' => 'Engineering', 'Humanities Management and Social Science' => 'Humanities Management and Social Science', 'Information and Communication Technology' => 'Information and Communication Technology', 'Law' => 'Law', 'Pure and Applied Science' => 'Pure and Applied Science'), '', ['class' => 'form-control m-b']) }}
+                                                {{ Form::select('faculty', array('' => 'Select', 'Agriculture' => 'Agriculture', 'Education' => 'Education', 'Engineering' => 'Engineering', 'Humanities Management and Social Science' => 'Humanities Management and Social Science', 'Information and Communication Technology' => 'Information and Communication Technology', 'Law' => 'Law', 'Pure and Applied Science' => 'Pure and Applied Science'), '', ['class' => 'form-control m-b', 'id' => 'mySelect', 'onchange' => 'myFunction()']) }}
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
@@ -317,10 +317,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $(document).on('change','.faculty',function(){
-            console.log('hmm its working');
-        });
+    function myFunction() {
+        var x = document.getElementById("mySelect").value;
+        console.log('hmm its working');
+
+
+        // $(document).on('change','.faculty',function(){
+        //     console.log('hmm its working');
+        // });
     });
 </script>
 

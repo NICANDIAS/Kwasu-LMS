@@ -20,7 +20,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="{{ url('/home')}}"><i class="fa fa-th-large"></i><span class="nav-label"> Dashboards </span></a>
+                    <a href="{{ url('/')}}"><i class="fa fa-th-large"></i><span class="nav-label"> Dashboards </span></a>
                 </li>
                 {{-- @if (Auth::user()->cadre == 'Patient') --}}
                     <li class="active">
