@@ -12,7 +12,7 @@
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="profile.html">Profile</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li><a href={{ route('logout') }}>Logout</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">

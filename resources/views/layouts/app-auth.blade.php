@@ -26,6 +26,7 @@
     <link href="{{ asset('css/style.css')}}" rel="stylesheet">
     <script src="js/countries.js"></script>
 
+    @include('inc.header-scripts')
 </head>
 <body>
     @include('inc.sidebar')

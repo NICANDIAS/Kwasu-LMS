@@ -4,7 +4,7 @@
 <div class="wrapper wrapper-content">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">SIGN-UP</h3>
+            <h3 class="panel-title" style="text-align: center">SIGN-UP</h3>
         </div>
         <div class="row">
             <div class="col-lg-12">
