@@ -51,6 +51,12 @@ Route::match(['post','get'], 'leaveType', 'leaveTypeController@create');
 Route::match(['post','get'], 'editLeaveType/{id}/edit', 'leaveTypeController@edit');
 Route::match(['post','get'], 'leaveType/{id}/delete', 'leaveTypeController@destroy');
 
+//Holidays
+Route::match(['post','get'], 'holiday', 'HolidayController@index');
+Route::match(['post','get'], 'holiday', 'HolidayController@create');
+Route::match(['post','get'], 'editHoliday/{id}/edit', 'HolidayController@edit');
+Route::match(['post','get'], 'holiday/{id}/delete', 'HolidayController@destroy');
+
 //Leave View Details
 Route::get('leaveViewDetails/{employee_id}/{id}', 'LeaveController@getleaveViewDetails');
 

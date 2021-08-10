@@ -53,6 +53,9 @@
                         <a href="{{ url('/unit') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Add Unit</span></a>
                     </li>
                     <li class="active">
+                        <a href="{{ url('/holiday') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Add Holiday</span></a>
+                    </li>
+                    <li class="active">
                         <a href="{{ url('/leaveType') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Leave Type</span></a>
                     </li>
                 {{-- @endif --}}
