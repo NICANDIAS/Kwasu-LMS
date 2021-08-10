@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Employee;
 use App\Models\allLeave;
 use App\Models\NextOfKin;
+use App\Models\Faculty;
+use App\Models\Department;
 use App\Models\Unit;
 use carbon\Carbon;
 
@@ -78,8 +80,12 @@ class signUpsController extends Controller
                 return redirect('/application');
             }
         }
+        $faculty = Faculty::pluck('faculty','id');
+        $department = Department::where('faculty_id',$request->id)->pluck('department','id')->take(100);
         $unit = Unit::pluck('unit','unit');
-        return view ('leave.signUp', ['user' => $user, 'unit' => $unit]);
+
+        return view ('leave.signUp', ['user' => $user, 'unit' => $unit, 'faculty' => $faculty, 'department'=>$department]);
+        return json_encode($department);
     }
 
     /**

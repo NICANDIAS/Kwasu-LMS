@@ -2,8 +2,7 @@
 @section('content')
 
 <div class="wrapper wrapper-content">
-    <div class="col-sm-2">
-    </div>
+    
     <div class="col-sm-8">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -14,9 +13,7 @@
                     <div class="form-group row">
                         {{ Form::label('leave type', 'LEAVE TYPE :',['class' => 'col-sm-3 col-form-label']) }}   
                         <div class="col-sm-8">
-                            {{-- @foreach($leave_t as $leaveType) --}}
-                            {{ Form::select('leaveType',['Select Leave Type'] + $leave_t->all(),'',['class' => 'form-control m-b']) }}
-                            {{-- @endforeach --}}
+                            {{ Form::select('leaveType', ['Select Leave Type'] + $leave_t->all(), '',['class' => 'form-control m-b', 'id' => 'LeaveDays', 'onchange' => 'myFunction()']) }}
                         </div>
                     </div>
                     <div class="form-group row">
@@ -38,18 +35,18 @@
             </div>
         </div>
     </div>
-    {{-- <div class="col-sm-4">
+    <div class="col-sm-4">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">LEAVE DAYS</h3>
+                <h3 class="panel-title" style="text-align: center">LEAVE DAYS</h3>
             </div>
             <div class="panel-body">
                 <div class="form-group row"> 
-                    <div class="col-sm-4"><span style="font-size:80px;">30Days</span></div>
+                    <div class="col-sm-4" id="leaveDays" style="font-size: 45px"></div>
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     @if(count($all_l) > 0)
         <div class="col-lg-12">
             <div class="panel panel-primary">
@@ -167,36 +164,11 @@
         });
 
     </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-           $('#leaveType').change(function () {
-             var id = $(this).val();
-
-             $('#leaveDays').find('option').not(':first').remove();
-
-             $.ajax({
-                url:'leaveType/'+id,
-                type:'get',
-                dataType:'json',
-                success:function (response) {
-                    var len = 0;
-                    if (response.leaveDays != null) {
-                        len = response.leaveDays.length;
-                    }
-
-                    if (len>0) {
-                        for (var i = 0; i<len; i++) {
-                             var id = response.leaveDays[i].id;
-                             var leave_days = response.leaveDays[i].leave_days;
-
-                             var option = "<option value='"+id+"'>"+leave_days+"</option>"; 
-
-                             $("#leaveDays").append(option);
-                        }
-                    }
-                }
-             })
-           });
-        });
-    </script>
+<script>
+    function myFunction() {
+        var x = document.getElementById("LeaveDays").value;
+        //document.getElementById("LeaveDayss").style.fontSize = "80px";
+        document.getElementById("leaveDays").innerHTML =  x + "Days";
+    }
+</script>
 @endsection

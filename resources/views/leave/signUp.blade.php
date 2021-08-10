@@ -64,13 +64,14 @@
                                         <div class="col-lg-4">
                                             {{ Form::label('faculty', 'Faculty:',['class' => 'col-sm-4 control-label']) }}   
                                             <div class="col-sm-8">
-                                                {{ Form::select('faculty', array('' => 'Select', 'Agriculture' => 'Agriculture', 'Education' => 'Education', 'Engineering' => 'Engineering', 'Humanities Management and Social Science' => 'Humanities Management and Social Science', 'Information and Communication Technology' => 'Information and Communication Technology', 'Law' => 'Law', 'Pure and Applied Science' => 'Pure and Applied Science'), '', ['class' => 'form-control m-b', 'id' => 'mySelect', 'onchange' => 'myFunction()']) }}
+                                                {{ Form::select('faculty', ['Select Faculty'] + $faculty->all(), '',['class' => 'form-control m-b', 'id' => 'faculty']) }}
                                             </div>
+                                            {{-- <p id="demo"></p> --}}
                                         </div>
                                         <div class="col-lg-4">
                                             {{ Form::label('department', 'Department:',['class' => 'col-sm-4 control-label']) }}   
                                             <div class="col-sm-8">
-                                                {{ Form::select('department', array('' => 'Select', 'college' => 'College', 'Department' => 'Department', 'unit' => 'Unit'), '', ['class' => 'form-control m-b']) }}
+                                                {{ Form::select('department', ['Select Department'] + $department->all(), '', ['class' => 'form-control m-b', 'id' => 'department']) }}
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
@@ -317,15 +318,34 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-    function myFunction() {
-        var x = document.getElementById("mySelect").value;
-        console.log('hmm its working');
-
-
-        // $(document).on('change','.faculty',function(){
-        //     console.log('hmm its working');
-        // });
-    });
+    jQuery(document).ready(function ()
+            {
+                    jQuery('select[name="faculty"]').on('change',function(){
+                       var faculty = jQuery(this).val();
+                       //console.log(faculty);
+                       if(faculty)
+                       {
+                          jQuery.ajax({
+                             url : 'signUp',
+                             type : "GET",
+                             dataType : "json",
+                             data : {'id':faculty}
+                             success:function(data)
+                             {
+                                console.log(data);
+                                jQuery('select[name="department"]').empty();
+                                jQuery.each(data, function(key,value){
+                                   $('select[name="department"]').append('<option value="'+ key +'">'+ value +'</option>');
+                                });
+                             }
+                          });
+                       }
+                       else
+                       {
+                          $('select[name="department"]').empty();
+                       }
+                    });
+            });
 </script>
 
 @endsection

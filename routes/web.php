@@ -23,11 +23,11 @@ Auth::routes();
 Route::get('/', 'homeController@index');
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::match(['post','get'],'signUp', 'signUpsController@create');
-Route::match(['post','get'],'application', 'LeaveController@index');
+Route::match(['post','get'], 'signUp', 'signUpsController@create');
+Route::match(['post','get'], 'application', 'LeaveController@index');
 Route::get('allLeave', 'LeaveController@show');
-Route::match(['post','get'],'applied', 'LeaveController@applied');
-Route::match(['post','get'],'approval/{id}', 'LeaveController@approval');
+Route::match(['post','get'], 'applied', 'LeaveController@applied');
+Route::match(['post','get'], 'approval/{id}', 'LeaveController@approval');
 Route::get('approved', 'LeaveController@getApprovedLeave');
 Route::match(['post','get'], 'editApplication/{id}/', 'LeaveController@edit');
 

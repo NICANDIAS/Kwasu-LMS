@@ -30,7 +30,7 @@ class LeaveController extends Controller
                 $leaveDays = leaveType::all()->where('leave_type','=',$all_leave->leave_type)->pluck('leave_days');
                 $leaveDays = empty($leaveDays[0]) ? 0 :  $leaveDays[0];
             $all_leave->leave_days = $leaveDays;
-            $newTime = date('d-m-Y', (strtotime($all_leave->date_from.' + '.$leaveDays.' days')));
+            $newTime = date('d-m-Y', (strtotime($all_leave->start_date.' + '.$leaveDays.' days')));
             $newDate = date('Y-m-d', strtotime($newTime));
             $all_leave->end_date = $newDate;
             $all_leave->default_days = $leaveDays;
@@ -39,7 +39,7 @@ class LeaveController extends Controller
             $all_leave->save();
         }
         
-        $leaveType = leaveType::pluck('leave_type','leave_type');
+        $leaveType = leaveType::pluck('leave_type','leave_days');
         $allLeave = allLeave::all()->where('staff_id','=',$user);
 
         return view('leave.application', ['leave_t' => $leaveType, 'all_l' => $allLeave]);
