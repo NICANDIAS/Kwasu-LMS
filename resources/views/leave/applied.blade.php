@@ -23,6 +23,7 @@
                                     <th>Posting Date</th>
                                     <th>Hod Remark</th>
                                     <th>Provost Remark</th>
+                                    <th>Registry Remark</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -40,7 +41,8 @@
                                     <td>{{$allLeave->leave_description}}</td>
                                     <td>{{$allLeave->posting_date}}<br>10:28</td>
                                     <td>{{$allLeave->hod_remark}}</td> 
-                                    <td>{{$allLeave->provost_remark}}</td>                           
+                                    <td>{{$allLeave->provost_remark}}</td> 
+                                    <td>{{$allLeave->registry_remark}}</td>                           
                                     <td>{{$allLeave->application_status}}</td>
                                     <th><a href="approval/{{$allLeave->id}}" class="btn btn-primary">Make Remark</a></th>
                                 </tr>
@@ -58,6 +60,7 @@
                                     <th>Posting Date</th>
                                     <th>Hod Remark</th>
                                     <th>Provost Remark</th>
+                                    <th>Registry Remark</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>

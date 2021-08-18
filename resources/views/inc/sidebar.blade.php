@@ -8,7 +8,19 @@
                                 </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{Auth::user()->name}}</strong></span> 
-                                <span class="text-muted text-xs block">{{Auth::user()->cadre}}<b class="caret"></b></span> </span> </a>
+                                @if(Auth::user()->user_access_id == '1')
+                                    <span class="text-muted text-xs block">{{"Normal Staff"}}<b class="caret"></b></span>
+                                @elseif (Auth::user()->user_access_id == '2')
+                                    <span class="text-muted text-xs block">{{"HOD"}}<b class="caret"></b></span>
+                                @elseif (Auth::user()->user_access_id == '3')
+                                    <span class="text-muted text-xs block">{{"PROVOST"}}<b class="caret"></b></span>
+                                @elseif (Auth::user()->user_access_id == '4')
+                                    <span class="text-muted text-xs block">{{"REGISTRY"}}<b class="caret"></b></span>
+                                @elseif (Auth::user()->user_access_id == '5')
+                                    <span class="text-muted text-xs block">{{"VICE CHANCELLOR"}}<b class="caret"></b></span>
+                                @elseif (Auth::user()->user_access_id == '100')
+                                    <span class="text-muted text-xs block">{{"SUPER ADMIN"}}<b class="caret"></b></span>
+                                @endif
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="profile.html">Profile</a></li>
                             <li class="divider"></li>

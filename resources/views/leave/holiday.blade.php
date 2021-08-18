@@ -45,7 +45,7 @@
         <div class="col-lg-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title" style="text-align: center">LEAVE TYPE</h3>
+                    <h3 class="panel-title" style="text-align: center">ALL HOLIDAYS</h3>
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">

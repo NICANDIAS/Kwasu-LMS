@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\allLeave;
 use App\Models\Employee;
 use App\Models\leaveType;
+use Illuminate\Support\Carbon;
+use PhpParser\Node\Stmt\If_;
 
 class LeaveController extends Controller
 {
@@ -18,31 +20,92 @@ class LeaveController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user()->name;
+        $userExist = Employee::where('staff_id',$user)->first();
+        $approvalCheck = allLeave::where('staff_id',$user)->pluck('application_status')->implode('');
+        $sharedLeave = allLeave::where('staff_id',$user)
+                                    ->where('application_status','Applied')
+                                    ->orWhere('application_status','REGISTRY has Approve')
+                                    ->orWhere('application_status','VC has Approve')->pluck('shared_leave')->implode('');
+        $sharedDays = allLeave::where('staff_id',$user)
+                                    ->where('application_status','Applied')->pluck('shared_days')->first();
         $department = Employee::where('staff_id','=',$user)->pluck("department")->first();
-        //$request->user();
 
-        if($request->isMethod('POST')){
-            $all_leave = new allLeave;
-            $all_leave->staff_id = $user;
-            $all_leave->department = $department;
-            $all_leave->leave_type = $request->input('leaveType');
-            $all_leave->start_date = $request->input('dateFrom');
-                $leaveDays = leaveType::all()->where('leave_type','=',$all_leave->leave_type)->pluck('leave_days');
-                $leaveDays = empty($leaveDays[0]) ? 0 :  $leaveDays[0];
-            $all_leave->leave_days = $leaveDays;
-            $newTime = date('d-m-Y', (strtotime($all_leave->start_date.' + '.$leaveDays.' days')));
-            $newDate = date('Y-m-d', strtotime($newTime));
-            $all_leave->end_date = $newDate;
-            $all_leave->default_days = $leaveDays;
-            $all_leave->days_applied_for = $leaveDays;
-            $all_leave->leave_description = $request->input('description');
-            $all_leave->save();
-        }
+        if($userExist){
+            //dd("User Exist");
+                if(in_array($approvalCheck, array('HOD has Recommend', 'PROVOST has Recommend'))){
+                    //Checks if the applicant has a pending application thats not yet approved or approval not complete
+                    var_dump("Your application is awating approval");
+                }elseif($approvalCheck == "Applied"){
+                    if($sharedLeave == "YES"){
+                        //dd("Your shared leave is YES");
+                        //Application for those that shared leave
+                        if($request->isMethod('POST')){
+                            $all_leave = new allLeave;
+                            $all_leave->staff_id = $user;
+                            $all_leave->department = $department;
+                            $all_leave->leave_type = $request->input('leaveType');
+                                $leaveDays = leaveType::all()->where('leave_type','=',$all_leave->leave_type)->pluck('leave_days');
+                                $leaveDays = empty($leaveDays[0]) ? 0 :  $leaveDays[0];
+                            $all_leave->start_date = $request->input('dateFrom');
+                            $all_leave->leave_days = $leaveDays;
+                            $remainingDays = $all_leave->leave_days - $sharedDays;
+                            $newTime = date('d-m-Y', (strtotime($all_leave->start_date.' + '.$remainingDays.' days')));
+                            $newDate = date('Y-m-d', strtotime($newTime));
+                            $all_leave->end_date = $newDate;
+                            $all_leave->default_days = $leaveDays;
+                            $all_leave->days_applied_for = $leaveDays;
+                            $all_leave->leave_description = $request->input('description');
+                            $all_leave->save();
+                        }
+                    }elseif($sharedLeave == "NO"){
+                        echo "<script>";
+                        echo "alert('hello');";
+                        echo "</script>";
+                        //var_dump("Your shared leave is No");
+                        // If No then it means no shared leave and can only apply if all aprovals are complete for previous application
+                        if($request->isMethod('POST')){
+                            $all_leave = new allLeave;
+                            $all_leave->staff_id = $user;
+                            $all_leave->department = $department;
+                            $all_leave->leave_type = $request->input('leaveType');
+                            $all_leave->start_date = $request->input('dateFrom');
+                                $leaveDays = leaveType::all()->where('leave_type','=',$all_leave->leave_type)->pluck('leave_days');
+                                $leaveDays = empty($leaveDays[0]) ? 0 :  $leaveDays[0];
+                            $all_leave->leave_days = $leaveDays;
+                            $newTime = date('d-m-Y', (strtotime($all_leave->start_date.' + '.$leaveDays.' days')));
+                            $newDate = date('Y-m-d', strtotime($newTime));
+                            $all_leave->end_date = $newDate;
+                            $all_leave->default_days = $leaveDays;
+                            $all_leave->days_applied_for = $leaveDays;
+                            $all_leave->leave_description = $request->input('description');
+                            $all_leave->save();
+                        }
+                    }else var_dump("Neither No nor Yes");
+                }else var_dump("Neither Approval nor Applied");
+            //Fresh application, For users that has never applied before
+            if($request->isMethod('POST')){
+                $all_leave = new allLeave;
+                $all_leave->staff_id = $user;
+                $all_leave->department = $department;
+                $all_leave->leave_type = $request->input('leaveType');
+                $all_leave->start_date = $request->input('dateFrom');
+                    $leaveDays = leaveType::all()->where('leave_type','=',$all_leave->leave_type)->pluck('leave_days');
+                    $leaveDays = empty($leaveDays[0]) ? 0 :  $leaveDays[0];
+                $all_leave->leave_days = $leaveDays;
+                $newTime = date('d-m-Y', (strtotime($all_leave->start_date.' + '.$leaveDays.' days')));
+                $newDate = date('Y-m-d', strtotime($newTime));
+                $all_leave->end_date = $newDate;
+                $all_leave->default_days = $leaveDays;
+                $all_leave->days_applied_for = $leaveDays;
+                $all_leave->leave_description = $request->input('description');
+                $all_leave->save();
+            }
+        }else dd("User does not exist");
         
         $leaveType = leaveType::pluck('leave_type','leave_days');
         $allLeave = allLeave::all()->where('staff_id','=',$user);
 
-        return view('leave.application', ['leave_t' => $leaveType, 'all_l' => $allLeave]);
+        return view('leave.application', ['leave_t' => $leaveType, 'all_l' => $allLeave, 'sharedDays' => $sharedDays]);
     }
 
     /**
@@ -137,19 +200,22 @@ class LeaveController extends Controller
         //
     }
 
-    public function applied(){
+    public function applied()
+    {
         $user = Auth::user()->name;
-        $linkUser = allLeave::where('staff_id','=',$user)->pluck("department")->first();
-        $allLeave = allLeave::all()->where('department','=', $linkUser);
+        $staffDepartment = allLeave::where('staff_id','=',$user)->pluck("department")->first();
+        $allLeave = allLeave::all()->where('department', $staffDepartment)
+                                    ->where('created_at', date('Y-m-d'));
+        // Articles::whereYear('created_at', date('Y'))->get();
     
-        return view('leave.applied', ['all_l' => $allLeave, 'linkUsers' => $linkUser]);
+        return view('leave.applied', ['all_l' => $allLeave]);
     }
 
     public function approval(Request $request, $id) {
         //Approval page
         if($request->isMethod('POST')){
             switch ($request->input('submitButton')){
-                case 'HOD APPROVE':
+                case 'HOD RECOMMEND':
                     //HOD Approval
                     $allLeave = allLeave::find($id);
                     $allLeave->hod_remark = $request->input('hodRemark');
@@ -162,7 +228,7 @@ class LeaveController extends Controller
                     return redirect('applied');
                 break;
 
-                case 'HOD DECLINE':
+                case 'HOD DO NOT RECOMMEND':
                     //HOD Decline
                     //Employee::find($employee_id);
                     $allLeave = allLeave::find($id);
@@ -176,7 +242,7 @@ class LeaveController extends Controller
                     return redirect('applied');
                 break;
 
-                case 'PROVOST APPROVE':
+                case 'PROVOST RECOMMEND':
                     //Provost approval
                     $allLeave = allLeave::find($id);
                     $allLeave->provost_remark = $request->input('provostRemark');
@@ -186,7 +252,7 @@ class LeaveController extends Controller
                     return redirect('applied');
                 break;
 
-                case 'PROVOST DECLINE':
+                case 'PROVOST DO NOT RECOMMEND':
                     //Provost Declined
                     $allLeave = allLeave::find($id);
                     $allLeave->provost_remark = $request->input('provostRemark');
@@ -198,15 +264,33 @@ class LeaveController extends Controller
 
                 case 'REGISTRY APPROVE':
                     //Registry approval
-                    allLeave::where('id',"{$id}")->update(['application_status' => 'REGISTRY has approved']);
+                    $allLeave = allLeave::find($id);
+                    $allLeave->registry_remark = $request->input('registryRemark');
+                    $allLeave->save();
 
+                    allLeave::where('id',"{$id}")->update(['application_status' => 'REGISTRY has approved']);
                     return redirect('applied');
                 break;
 
                 case 'REGISTRY DECLINE':
                     //Registry Declined
-                    allLeave::where('id',"{$id}")->update(['application_status' => 'REGISTRY has declined']);
+                    $allLeave = allLeave::find($id);
+                    $allLeave->registry_remark = $request->input('registryRemark');
+                    $allLeave->save();
 
+                    allLeave::where('id',"{$id}")->update(['application_status' => 'REGISTRY has declined']);
+                    return redirect('applied');
+                break;
+
+                case 'VC APPROVE':
+                    //VC approval
+                    allLeave::where('id',"{$id}")->update(['application_status' => 'VC has approved']);
+                    return redirect('applied');
+                break;
+
+                case 'VC DECLINE':
+                    //VC Declined
+                    allLeave::where('id',"{$id}")->update(['application_status' => 'VC has declined']);
                     return redirect('applied');
                 break;
             }

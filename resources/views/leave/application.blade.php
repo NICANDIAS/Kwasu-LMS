@@ -11,19 +11,28 @@
             <div class="panel-body">
                 {{ Form::open(array('action' => 'LeaveController@index', 'method' => 'POST'))}}
                     <div class="form-group row">
-                        {{ Form::label('leave type', 'LEAVE TYPE :',['class' => 'col-sm-3 col-form-label']) }}   
+                        {{ Form::label('leave type', 'Leave type:',['class' => 'col-sm-3 col-form-label']) }}   
                         <div class="col-sm-8">
                             {{ Form::select('leaveType', ['Select Leave Type'] + $leave_t->all(), '',['class' => 'form-control m-b', 'id' => 'LeaveDays', 'onchange' => 'myFunction()']) }}
                         </div>
                     </div>
                     <div class="form-group row">
-                        {{ Form::label('date from', 'DATE FROM :',['class' => 'col-sm-3 col-form-label']) }}   
+                        {{ Form::label('shared leave', 'Shared leave:',['class' => 'col-sm-3 col-form-label']) }}   
+                        <div class="col-sm-3">
+                            {{ Form::select('sharedLeave', array('NO'=>'NO','YES'=>'YES'), '',['class' => 'form-control m-b', 'id'=>'SharedDays', 'onchange'=>'sharedFunction()']) }}
+                        </div>
+                        <div class="col-sm-5" id="sharedDays" style="display: none">
+                            {{ Form::number('sharedDays', '',['class' => 'form-control m-b', 'placeholder' => 'Shared Days']) }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {{ Form::label('date from', 'Start date:',['class' => 'col-sm-3 col-form-label']) }}   
                         <div class="col-sm-8">
                             {{ Form::date('dateFrom', '', ['class' => 'form-control','placeholder' =>'DATE FROM', 'required' => 'required']) }}
                         </div>
                     </div>
                     <div class="form-group row">
-                        {{ Form::label('discription', 'DISCRIPTION :',['class' => 'col-sm-3 col-form-label']) }}   
+                        {{ Form::label('discription', 'Discription:',['class' => 'col-sm-3 col-form-label']) }}   
                         <div class="col-sm-8">
                             {{ Form::textarea('description', '', ['class' => 'form-control','placeholder' =>'DISCRIPTION', 'row' => '4', 'cols' => '30', 'required' => 'required']) }}
                         </div>
@@ -42,7 +51,11 @@
             </div>
             <div class="panel-body">
                 <div class="form-group row"> 
-                    <div class="col-sm-4" id="leaveDays" style="font-size: 45px"></div>
+                    <div class="col-sm-12" id="leaveDays" style="font-size: 45px"></div>
+                </div>
+                <hr>
+                <div class="form-group row"> 
+                    <div class="col-sm-12" id="remainingDays" style="font-size: 25px"></div>
                 </div>
             </div>
         </div>
@@ -79,7 +92,7 @@
                                 <tr>
                                     <td>{{$s++}}</td>
                                     <td>{{$allLeave->leave_type}}</td>
-                                    <td>{{$allLeave->start_date}}</td>
+                                    <td>{{$allLeave->start_date}} <br> {{ $allLeave->leave_days - $sharedDays}}</td>
                                     <td>{{$allLeave->end_date}}</td>
                                     <td>{{$allLeave->leave_days}}</td>
                                     <td>{{$allLeave->leave_description}}</td>
@@ -167,8 +180,20 @@
 <script>
     function myFunction() {
         var x = document.getElementById("LeaveDays").value;
-        //document.getElementById("LeaveDayss").style.fontSize = "80px";
+        var remainingDays = <?php echo $sharedDays; ?>;
+
         document.getElementById("leaveDays").innerHTML =  x + "Days";
+        document.getElementById("remainingDays").innerHTML = x - remainingDays + "Days Left";
     }
 </script>
+<script>
+    function sharedFunction() {
+        var x = document.getElementById("SharedDays").value;
+        if(x == 'YES'){
+            $("#sharedDays").show();
+        }else 
+            $("#sharedDays").hide();
+    }
+</script>
+
 @endsection
