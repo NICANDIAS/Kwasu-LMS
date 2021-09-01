@@ -30,7 +30,6 @@
 </head>
 <body>
     @include('inc.sidebar')
-
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
@@ -87,6 +86,8 @@
 </div>
 
 <div class="loginColumns animated fadeInDown">
+    @include('inc.flash-messages')
+
     @yield('content')
     
     {{-- <hr/>

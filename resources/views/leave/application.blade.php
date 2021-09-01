@@ -2,12 +2,12 @@
 @section('content')
 
 <div class="wrapper wrapper-content">
-    
     <div class="col-sm-8">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title" style="text-align: center">LEAVE APPLICATION</h3>
             </div>
+            <div class="alert-danger" style="text-align: center">{{$message}}</div>
             <div class="panel-body">
                 {{ Form::open(array('action' => 'LeaveController@index', 'method' => 'POST'))}}
                     <div class="form-group row">
@@ -37,9 +37,17 @@
                             {{ Form::textarea('description', '', ['class' => 'form-control','placeholder' =>'DISCRIPTION', 'row' => '4', 'cols' => '30', 'required' => 'required']) }}
                         </div>
                     </div>
-                    <div style="text-align:center;">
-                        {{ Form::submit('APPLY', ['class'=>'btn btn-sm btn-primary m-t-n-xs']) }}
-                    </div>
+                    @if ($userExist === null)
+                        <div style="text-align:center;">
+                            {{ Form::submit('APPLY', ['class'=>'btn btn-sm btn-primary m-t-n-xs']) }}
+                        </div>
+                    @else
+                        @if(in_array($approvalCheck, array('REGISTRY has approved','VC has approved')))
+                            <div style="text-align:center;">
+                                {{ Form::submit('APPLY', ['class'=>'btn btn-sm btn-primary m-t-n-xs']) }}
+                            </div>
+                        @endif
+                    @endif
                 {{ Form::close() }}
             </div>
         </div>
@@ -149,41 +157,41 @@
 <script src="js/plugins/pace/pace.min.js"></script>
 
 <script>
-        $(document).ready(function(){
-            $('.dataTables-example').DataTable({
-                pageLength: 25,
-                responsive: true,
-                dom: '<"html5buttons"B>lTfgitp',
-                buttons: [
-                    { extend: 'copy'},
-                    {extend: 'csv'},
-                    {extend: 'excel', title: 'ExampleFile'},
-                    {extend: 'pdf', title: 'ExampleFile'},
+    $(document).ready(function(){
+        $('.dataTables-example').DataTable({
+            pageLength: 25,
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [
+                { extend: 'copy'},
+                {extend: 'csv'},
+                {extend: 'excel', title: 'ExampleFile'},
+                {extend: 'pdf', title: 'ExampleFile'},
 
-                    {extend: 'print',
-                     customize: function (win){
-                            $(win.document.body).addClass('white-bg');
-                            $(win.document.body).css('font-size', '10px');
+                {extend: 'print',
+                    customize: function (win){
+                        $(win.document.body).addClass('white-bg');
+                        $(win.document.body).css('font-size', '10px');
 
-                            $(win.document.body).find('table')
-                                    .addClass('compact')
-                                    .css('font-size', 'inherit');
-                    }
-                    }
-                ]
-
-            });
+                        $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                }
+                }
+            ]
 
         });
 
-    </script>
+    });
+
+</script>
 <script>
     function myFunction() {
         var x = document.getElementById("LeaveDays").value;
-        var remainingDays = <?php echo $sharedDays; ?>;
+        //var remainingDays = <?php echo $sharedDays; ?>;
 
         document.getElementById("leaveDays").innerHTML =  x + "Days";
-        document.getElementById("remainingDays").innerHTML = x - remainingDays + "Days Left";
+        //document.getElementById("remainingDays").innerHTML = x - remainingDays + "Days Left";
     }
 </script>
 <script>

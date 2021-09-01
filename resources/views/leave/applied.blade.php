@@ -6,7 +6,7 @@
         <div class="col-lg-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title"> APPLIED LEAVE</h3>
+                    <h3 class="panel-title"> APPLIED LEAVE </h3>
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
