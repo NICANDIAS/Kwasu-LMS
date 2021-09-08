@@ -6,30 +6,30 @@
 </div> --}}
 
 <!--<script src="{{ asset('public/js/app.js') }}" type="text/javascript"></script>-->
-<script src="js/jquery-2.1.1.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="{{ asset('js/jquery-2.1.1.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 {{-- <script src="js/countries.js"></script> --}}
-<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="js/angularjs/angular.min.js"></script>
+<script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+<script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ asset('js/angularjs/angular.min.js') }}"></script>
 <!-- Custom and plugin javascript -->
-<script src="js/flicks.js"></script>
-<script src="js/flicksapp.js"></script>
-<script src="js/plugins/pace/pace.min.js"></script>
-<script src="js/plugins/toastr/toastr.min.js"></script>
-<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="js/plugins/idle-timer/idle-timer.min.js"></script>
+<script src="{{ asset('js/flicks.js') }}"></script>
+<script src="{{ asset('js/flicksapp.js') }}"></script>
+<script src="{{ asset('js/plugins/pace/pace.min.js') }}"></script>
+<script src="{{ asset('js/plugins/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('js/plugins/sweetalert/sweetalert.min.js') }}"></script>
+<script src="{{ asset('js/plugins/idle-timer/idle-timer.min.js') }}"></script>
 
-<script src="js/angularjs/app.js"></script>
+<script src="{{ asset('js/angularjs/app.js')}}"></script>
 {{--<script src="{{ asset('public/js/plugins/oclazyload/dist/ocLazyLoad.min.js') }}"></script>--}}
 {{--<script src="{{ asset('public/js/ui-router/angular-ui-router.min.js') }}"></script>--}}
-<script src="js/plugins/dataTables/datatables.min.js"></script>
-<script src="js/plugins/dataTables/angular-datatables.min.js"></script>
-<script src="js/plugins/dataTables/angular-datatables.buttons.min.js"></script>
+<script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
+<script src="{{ asset('js/plugins/dataTables/angular-datatables.min.js') }}"></script>
+<script src="{{ asset('js/plugins/dataTables/angular-datatables.buttons.min.js') }}"></script>
 
-<script src="js/angularjs/angular-sanitize.js" type="text/javascript"></script>
-<script src="js/angularjs/ng-file-upload/ng-file-upload.min.js" type="text/javascript"></script>
-<script src="public/js/angularjs/ng-file-upload/ng-file-upload-shim.min.js" type="text/javascript"></script>
+<script src="{{ asset('js/angularjs/angular-sanitize.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/angularjs/ng-file-upload/ng-file-upload.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/angularjs/ng-file-upload/ng-file-upload-shim.min.js') }}" type="text/javascript"></script>
 
 <script>
     $(document).ready(function () {

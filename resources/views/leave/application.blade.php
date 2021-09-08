@@ -7,7 +7,7 @@
             <div class="panel-heading">
                 <h3 class="panel-title" style="text-align: center">LEAVE APPLICATION</h3>
             </div>
-            <div class="alert-danger" style="text-align: center">{{$message}}</div>
+            <div class="alert-primary" style="text-align: center">{{$message}}</div>
             <div class="panel-body">
                 {{ Form::open(array('action' => 'LeaveController@index', 'method' => 'POST'))}}
                     <div class="form-group row">
@@ -148,7 +148,6 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
 <script src="js/plugins/dataTables/datatables.min.js"></script>
 <script src="js/plugins/footable/footable.all.min.js"></script>
 
@@ -169,7 +168,7 @@
                 {extend: 'pdf', title: 'ExampleFile'},
 
                 {extend: 'print',
-                    customize: function (win){
+                 customize: function (win){
                         $(win.document.body).addClass('white-bg');
                         $(win.document.body).css('font-size', '10px');
 
@@ -203,5 +202,4 @@
             $("#sharedDays").hide();
     }
 </script>
-
 @endsection

@@ -3875,7 +3875,11 @@ input[type=button].btn-block {
 }
 
 .nav {
-  display: flex;
+  /* display: flex; */
+  background-color: #2f4050;
+  height: 100%;
+  width: 225px;
+  position: fixed;
   flex-wrap: wrap;
   padding-left: 0;
   margin-bottom: 0;

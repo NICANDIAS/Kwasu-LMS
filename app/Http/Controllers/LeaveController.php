@@ -26,10 +26,11 @@ class LeaveController extends Controller
     {
         $user = Auth::user()->name;
         $userExist = allLeave::where('staff_id',$user)->first();
-        $approvalCheck = allLeave::where('staff_id',$user)->pluck('application_status')->implode('');
-        $sharedLeave = allLeave::where('staff_id',$user)
+        $approvalCheck = allLeave::orderBy('created_at', 'DESC')->where('staff_id',$user)->pluck('application_status')->first();
+        $sharedLeave = allLeave::orderBy('created_at', 'DESC')
+                                ->where('staff_id',$user)
                                 ->whereIn('application_status',['Applied','VC has approved','REGISTRY has approved'])
-                                ->pluck('shared_leave')->implode('');
+                                ->pluck('shared_leave')->first();
                                 //dd($sharedLeave);
         $sharedDays = allLeave::where('staff_id',$user)
                                 ->where('application_status','Applied')->pluck('shared_days')->first();
@@ -120,7 +121,7 @@ class LeaveController extends Controller
         }
         
         $leaveType = leaveType::pluck('leave_type','leave_type');
-        $allLeave = allLeave::all()->where('staff_id','=',$user);
+        $allLeave = allLeave::orderBy('created_at', 'DESC')->where('staff_id','=',$user)->get();
 
         return view('leave.application', ['leave_t' => $leaveType, 
                                             'all_l' => $allLeave, 

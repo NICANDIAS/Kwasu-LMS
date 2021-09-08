@@ -1,39 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Hayok Medicare') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet">
-
-    <link href="{{ asset('css/animate.css')}}" rel="stylesheet">
-    <link href="{{ asset('css/style.css')}}" rel="stylesheet">
-    <script src="js/countries.js"></script>
-
     @include('inc.header-scripts')
 </head>
 <body>
-    @include('inc.sidebar')
+@include('inc.sidebar')
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Hayok Medicare') }}</a>
+            <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'KWASU - LMS') }}</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -86,30 +61,12 @@
 </div>
 
 <div class="loginColumns animated fadeInDown">
-    @include('inc.flash-messages')
 
-    @yield('content')
+@include('inc.flash-messages')
+@yield('content')
     
-    {{-- <hr/>
-    <div class="row">
-        <div class="col-md-6">
-            Copyright {{ config('app.name') }}
-        </div>
-        <div class="col-md-6 text-right">
-            <small>&copy; 2017-{{ date('Y') }}</small>
-        </div>
-    </div> --}}
 </div>
-   
-
-    <!-- Scripts -->
-    <script src="js/app.js"></script>
-    <script src="js/angularjs/angular.min.js"></script>
-    <script src="js/angularjs/app.js"></script>
-    <script src="js/plugins/oclazyload/dist/ocLazyLoad.min.js"></script>
-    <script src="js/ui-router/angular-ui-router.min.js"></script>
-    <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
-    <script src="js/app/flicksauth.js"></script>
-    
+    @include('inc.lower-script')
+    @include('inc.footer-script')    
 </body>
 </html>

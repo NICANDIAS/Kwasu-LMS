@@ -24,7 +24,7 @@ Auth::routes();
 Route::get('/', 'homeController@index');
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Lecturer, HOD and Provost
+//staff, HOD and Provost
 Route::group(['middleware' => 'App\Http\Middleware\lecturerHodProvostMiddleware'], function() {
     Route::match(['post','get'], 'application', 'LeaveController@index');
     Route::match(['post','get'], 'editApplication/{id}/', 'LeaveController@edit');
@@ -82,6 +82,9 @@ Route::group(['middleware' => 'App\Http\Middleware\RegistryMiddleware'], functio
 
 Route::match(['post','get'], 'signUp', 'signUpsController@create');
 Route::match(['post','get'], 'application', 'LeaveController@index');
+
+Route::match(['post','get'], 'profile', 'profileController@index');
+Route::match(['post','get'], 'profile/{staff_id}', 'profileController@edit');
 
 Route::match(['post','get'], 'editApplication/{id}/', 'LeaveController@edit');
 
