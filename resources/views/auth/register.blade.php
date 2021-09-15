@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<body class="gray-bg" style="background-image: url(img/Leave1.jpeg); background-size: cover;" data-ng-app="flicksApps" data-ng-controller="flicksAuthController">
+<body class="gray-bg" style="background-image: url(img/Leave6.jpg); background-size: cover;" data-ng-app="flicksApps" data-ng-controller="flicksAuthController">
     <div class="container">
         <div class="row justify-content-center" style="padding-top: 150px">
             <h2 style="font-size: 40px; color: black;"><b>KWARA STATE UNIVERSITY - LEAVE MANAGEMENT SYSTEM</b></h2>

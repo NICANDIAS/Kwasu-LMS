@@ -10,15 +10,16 @@ use Illuminate\Notifications\Notification;
 class HodRecommend extends Notification
 {
     use Queueable;
+    private $hodRec;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($hodRec)
     {
-        //
+        $this->hodRec = $hodRec;
     }
 
     /**
@@ -41,9 +42,9 @@ class HodRecommend extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Your HOD has recommended your leave application.')
-                    ->action('View Application', url('/application'))
-                    ->line('Thank you for using our application!');
+                    ->line($this->hodRec['body'])
+                    ->action($this->hodRec['hodText'], $this->hodRec['url'])
+                    ->line($this->hodRec['thankyou']);
     }
 
     /**

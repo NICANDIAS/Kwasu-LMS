@@ -9,7 +9,7 @@
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear"> 
                             <span class="block m-t-xs"> <strong class="font-bold">{{Auth::user()->name}}</strong></span>
-                            @if(Auth::user()->user_access_id == '1')
+                            @if (Auth::user()->user_access_id == '1')
                                 <span class="text-muted text-xs block">{{"Normal Staff"}}<b class="caret"></b></span>
                             @elseif (Auth::user()->user_access_id == '2')
                                 <span class="text-muted text-xs block">{{"HOD"}}<b class="caret"></b></span>
