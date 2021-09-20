@@ -88,7 +88,4 @@ Route::match(['post','get'], 'profile/{staff_id}', 'profileController@edit');
 
 Route::match(['post','get'], 'editApplication/{id}/', 'LeaveController@edit');
 
-
-
-
 return Activity::all();
