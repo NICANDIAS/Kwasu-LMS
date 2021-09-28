@@ -48,6 +48,7 @@ Route::group(['middleware' => 'App\Http\Middleware\HodProvostRegistryMiddleware'
 //REGISTRY
 Route::group(['middleware' => 'App\Http\Middleware\RegistryMiddleware'], function() {
     Route::match(['post','get'],'search', 'signUpsController@show');
+    Route::match(['post','get'],'log', 'ActivityLogController@index');
     Route::get('allLeave', 'LeaveController@show');
     Route::get('approved', 'LeaveController@getApprovedLeave');
 

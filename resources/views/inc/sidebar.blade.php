@@ -80,6 +80,9 @@
                 <li>
                     <a href="{{ url('/holiday') }}"><i class="fa fa-calendar"></i><span class="nav-label">Add Holiday</span></a>
                 </li>
+                <li>
+                    <a href="{{ url('/log') }}"><i class="fa fa-calendar"></i><span class="nav-label">Activity Log</span></a>
+                </li>
             @endif
             {{-- <li>
                 <a href="{{ url('/signUp') }}"><i class="fa fa-user-plus"></i><span class="nav-label">signUp - SignUp</span></a>
