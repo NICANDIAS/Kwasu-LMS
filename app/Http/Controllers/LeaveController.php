@@ -239,6 +239,14 @@ class LeaveController extends Controller
 
     public function approval(Request $request, $id) {
         //Approval page
+        $user = Auth::user()->name;
+        $hodRec = [
+            'body' => 'You received a new text notification',
+            'hodText' => 'You have been recommended',
+            'url' => url('/'),
+            'thankyou' => 'Thank you very much for using our App',
+        ];
+
         $staffId = allLeave::where('id',$id)->pluck('staff_id');
         $applicationOwner = User::where('name',$staffId);
 
@@ -252,7 +260,7 @@ class LeaveController extends Controller
                     $allLeave->save();
 
                     allLeave::where('id',"{$id}")->update(['application_status' => 'HOD has Recommend']);
-                    //$applicationOwner->notify(new HodRecommend($staffId));
+                    $user->notify(new HodRecommend($hodRec));
                     return redirect('applied');
                 break;
 

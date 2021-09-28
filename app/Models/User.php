@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, LogsActivity;
 
+    protected $primaryKey = 'name';
+    public $incrementing = false;
     protected static $logName = 'user';
     protected static $logAttributes = ['name', 'email'];
     /**
