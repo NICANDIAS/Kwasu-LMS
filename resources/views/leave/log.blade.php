@@ -14,9 +14,7 @@
                             <tr>
                                 <th>S/N</th>
                                 <th>Causer ID</th>
-                                <th>Causer type</th>
                                 <th>Description</th>
-                                <th>Subject ID</th>
                                 <th>properties</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
@@ -27,9 +25,7 @@
                                 <tr>
                                     <td>{{$log->id}}</td>
                                     <td>{{$log->causer_id}}</td>
-                                    <td>{{$log->causer_type}}</td>
                                     <td>{{$log->description}}</td>
-                                    <td>{{$log->subject_id}}</td>
                                     <td>{{$log->properties}}</td>
                                     <th>{{$log->created_at}}</th>
                                     <th>{{$log->updated_at}}</th>
@@ -39,9 +35,7 @@
                                 <tr>
                                     <th>S/N</th>
                                     <th>Causer ID</th>
-                                    <th>Causer type</th>
                                     <th>Description</th>
-                                    <th>Subject ID</th>
                                     <th>properties</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
