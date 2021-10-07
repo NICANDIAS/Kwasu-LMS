@@ -17,7 +17,7 @@ class RegistryMiddleware
      */
     public function handle($request, Closure $next) {
         $user = $request->user();
-        if ($request->user() && $request->user()->user_access_id == '4' or $user->user_access_id == '100') {
+        if ($request->user() && $request->user()->user_access_id == '4'  or $user->user_access_id == '5' or $user->user_access_id == '100') {
             return $next($request);
         }else return new Response(view('unauthorized')->with('role', 'REGISTRY'));
     }

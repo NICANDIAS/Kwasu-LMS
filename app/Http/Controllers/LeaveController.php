@@ -161,7 +161,7 @@ class LeaveController extends Controller
      */
     public function show()
     {
-        //Displaying the details of all the applied Leave
+        //Displaying the details of all Leave
         $allLeave = allLeave::all();
         $department = allLeave::all()->pluck('department');
         $noOfStaffInDepartment = allLeave::where('department',$department)->count();
@@ -221,14 +221,20 @@ class LeaveController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Delete Leave Application
+        $leave = allLeave::find($id);
+        $leave->delete();
+
+        return redirect('application')->with('leave',$leave);
     }
 
     public function applied()
     {
         $user = Auth::user()->name;
+        $staffUnit = allLeave::where('staff_id','=',$user)->pluck("unit")->first();
         $staffDepartment = allLeave::where('staff_id','=',$user)->pluck("department")->first();
         $allLeave = allLeave::all()->where('department', $staffDepartment)
+                                    ->Where('unit', $staffUnit)
                                     ->whereBetween('created_at', [
                                         Carbon::now()->startOfYear(),
                                         Carbon::now()->endOfYear(),

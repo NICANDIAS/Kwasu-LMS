@@ -46,17 +46,17 @@
             <li class="active">
                 <a href="{{ url('/')}}"><i class="fa fa-th-large"></i><span class="nav-label"> Dashboards </span></a>
             </li>
-            @if (in_array(Auth::user()->user_access_id, array('1','2','3','4','100')))
+            @if (in_array(Auth::user()->user_access_id, array('1','2','3','4','5','100')))
                 <li>
                     <a href="{{ url('/application') }}"><i class="fa fa-pencil-square-o"></i><span class="nav-label">Apply</span></a>
                 </li>
             @endif
-            @if (in_array(Auth::user()->user_access_id, array('2','3','4','100')))
+            @if (in_array(Auth::user()->user_access_id, array('2','3','4','5','100')))
                 <li>
                     <a href="{{ url('/applied') }}"><i class="fa fa-file-word-o"></i><span class="nav-label">Applied</span></a>
                 </li>
             @endif
-            @if (in_array(Auth::user()->user_access_id, array('4','100')))
+            @if (in_array(Auth::user()->user_access_id, array('4','5','100')))
                 <li>
                     <a href="{{ url('/search') }}"><i class="fa fa-search"></i><span class="nav-label">Search</span></a>
                 </li>

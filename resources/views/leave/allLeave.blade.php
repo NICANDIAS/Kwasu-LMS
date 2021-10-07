@@ -20,7 +20,8 @@
                                 <th>STATUS</th> 
                                 <th>HOD</th>
                                 <th>Provost</th>
-                                <th>Registry</th>                          
+                                <th>Registry</th> 
+                                <th>VC</th>                          
                                 <th>ACTION</th>
                             </tr>
                         </thead>
@@ -64,12 +65,16 @@
                                         <span style="color: green;">{{$allLeave->application_status}}</span>
                                     @elseif ($allLeave->application_status == 'REGISTRY has declined')
                                         <span style="color: red;">{{$allLeave->application_status}}</span>
+                                    @elseif ($allLeave->application_status == 'VC has approved')
+                                        <span style="color: green;(199, 191, 191);">{{$allLeave->application_status}}</span>
+                                    @elseif ($allLeave->application_status == 'VC has decline')
+                                        <span style="color: red;">{{$allLeave->application_status}}</span>
                                     @endif
                                 </td>
                                 <td>
                                     @if (in_array($allLeave->application_status, array('Applied','HOD has declined')))
                                         <a class="fa fa-times-circle fa-3x"></a>
-                                    @elseif (in_array($allLeave->application_status, array('HOD has Approved','PROVOST has approved','REGISTRY has approved','REGISTRY has declined')))
+                                    @elseif (in_array($allLeave->application_status, array('HOD has Recommend','PROVOST has Recommend','REGISTRY has approved','REGISTRY has declined','VC has approved')))
                                         <a class="fa fa-check-circle fa-3x"></a>
                                     @endif
                                 </td>
@@ -87,7 +92,14 @@
                                 <td>
                                     @if (in_array($allLeave->application_status, array('Applied','HOD has Approved','HOD has declined','PROVOST has approved','PROVOST has declined','REGISTRY has declined')))
                                         <a class="fa fa-times-circle fa-3x"></a>
-                                    @elseif ($allLeave->application_status == 'REGISTRY has approved')
+                                    @elseif (in_array($allLeave->application_status, array('REGISTRY has approved','VC has approved')))
+                                        <a class="fa fa-check-circle fa-3x"></a>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if (in_array($allLeave->application_status, array('Applied','HOD has Recommend','HOD has declined','PROVOST has approved','PROVOST has declined','REGISTRY has approved','REGISTRY has declined','VC has decline')))
+                                        <a class="fa fa-times-circle fa-3x"></a>
+                                    @elseif ($allLeave->application_status == 'VC has approved')
                                         <a class="fa fa-check-circle fa-3x"></a>
                                     @endif
                                 </td>
@@ -107,7 +119,8 @@
                                     <th>STATUS</th>
                                     <th>HOD</th>
                                     <th>Provost</th>
-                                    <th>Registry</th>                           
+                                    <th>Registry</th>
+                                    <th>VC</th>                          
                                     <th>ACTION</th>
                                 </tr>
                             </tfoot>

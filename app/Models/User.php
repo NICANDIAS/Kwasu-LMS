@@ -14,8 +14,10 @@ class User extends Authenticatable
 
     protected $primaryKey = 'name';
     public $incrementing = false;
+    
     protected static $logName = 'user';
     protected static $logAttributes = ['name', 'email'];
+
     /**
      * The attributes that are mass assignable.
      *
