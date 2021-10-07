@@ -17,7 +17,7 @@ class HodProvostRegistryMiddleware
      */
     public function handle($request, Closure $next){
         $user = $request->user();
-        if ($user && ($user->user_access_id == '2' or $user->user_access_id == '3' or $user->user_access_id == '4' or $user->user_access_id == '100')) {
+        if ($user && ($user->user_access_id == '2' or $user->user_access_id == '3' or $user->user_access_id == '4' or $user->user_access_id == '5' or $user->user_access_id == '100')) {
             return $next($request);
         }else return new Response(view('unauthorized')->with('role', 'HOD'));
     }

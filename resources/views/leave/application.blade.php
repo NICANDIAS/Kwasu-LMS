@@ -32,9 +32,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        {{ Form::label('discription', 'Discription:',['class' => 'col-sm-3 col-form-label']) }}   
+                        {{ Form::label('description', 'Remark:',['class' => 'col-sm-3 col-form-label']) }}   
                         <div class="col-sm-8">
-                            {{ Form::textarea('description', '', ['class' => 'form-control','placeholder' =>'DISCRIPTION', 'row' => '4', 'cols' => '30', 'required' => 'required']) }}
+                            {{ Form::textarea('description', '', ['class' => 'form-control','placeholder' =>'REMARK', 'row' => '4', 'cols' => '30', 'required' => 'required']) }}
                         </div>
                     </div>
                     @if ($userExist === null)
@@ -112,7 +112,7 @@
                                     @if($allLeave->application_status != 'Applied') 
                                         <td>{{"Cant be Edited"}}</td>
                                     @else 
-                                        <td><a class="btn btn-primary" onclick="return confirm('Are you sure you want to update?')" href="editApplication/{{$allLeave->id}}">Edit</a> | <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this leave application?')" href="application/{{$allLeave->id}}">Delete</a></td>
+                                        <td><a class="btn btn-primary" onclick="return confirm('Are you sure you want to update?')" href="editApplication/{{$allLeave->id}}">Edit</a> | <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this leave application?')" href="deleteApplication/{{$allLeave->id}}">Delete</a></td>
                                     @endif 
                                     <td><a class="btn btn-primary" href="#">Print</a></td>
                                 </tr>
@@ -189,7 +189,7 @@
         var x = document.getElementById("LeaveDays").value;
         //var remainingDays = <?php echo $sharedDays; ?>;
 
-        document.getElementById("leaveDays").innerHTML =  x + "Days";
+        document.getElementById("leaveDays").innerHTML =  x + " Days";
         //document.getElementById("remainingDays").innerHTML = x - remainingDays + "Days Left";
     }
 </script>

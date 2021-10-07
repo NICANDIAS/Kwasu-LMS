@@ -4,7 +4,7 @@
 <div class="wrapper wrapper-content">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title" style="text-align: center">FULL BIO</h3>
+            <h3 class="panel-title" style="text-align: center">STAFF BIO-DATA</h3>
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -47,13 +47,13 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
-                                            {{ Form::label('staffType', 'STAFF-TYPE:',['class' => 'col-sm-4 control-label']) }}   
+                                            {{ Form::label('staffCategory', 'STAFF-CATEGORY:',['class' => 'col-sm-4 control-label']) }}   
                                             <div class="col-sm-8">
-                                                {{ Form::select('staffType', array('' => 'Select', 'senior' => 'Senior Staff', 'junior' => 'Junior Staff'), '', ['class' => 'form-control m-b','required' => 'required']) }}
+                                                {{ Form::select('staffCategory', array('' => 'Select', 'Teaching' => 'Teaching Staff', 'Non-Teaching' => 'Non-Teaching Staff'), '', ['class' => 'form-control m-b','required' => 'required']) }}
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
-                                            {{ Form::label('institute', 'Institute:',['class' => 'col-sm-4 control-label']) }}   
+                                            {{ Form::label('institute', 'Division:',['class' => 'col-sm-4 control-label']) }}   
                                             <div class="col-sm-8">
                                                 {{ Form::select('institute', array('' => 'Select', 'faculty' => 'Faculty', 'center' => 'Center'), '', ['class' => 'form-control m-b','required' => 'required']) }}
                                             </div>
@@ -95,11 +95,12 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
-                                            {{ Form::label('staffCategory', 'STAFF-CATEGORY:',['class' => 'col-sm-4 control-label']) }}   
+                                            {{ Form::label('staffType', 'STAFF-CADRE:',['class' => 'col-sm-4 control-label']) }}   
                                             <div class="col-sm-8">
-                                                {{ Form::select('staffCategory', array('' => 'Select', 'Teaching' => 'Teaching Staff', 'Non-Teaching' => 'Non-Teaching Staff'), '', ['class' => 'form-control m-b','required' => 'required']) }}
+                                                {{ Form::select('staffType', array('' => 'Select', 'senior' => 'Senior Staff', 'junior' => 'Junior Staff'), '', ['class' => 'form-control m-b','required' => 'required']) }}
                                             </div>
                                         </div>
+
                                     </div>
                                     <div class="form-group">
                                         <div class="col-lg-12">
@@ -239,19 +240,19 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
-                                    {{ Form::label('Nsurname', 'SUR-NAME:', ['class' => 'col-sm-4 control-label']) }}
+                                    {{ Form::label('Nsurname', 'Surname:', ['class' => 'col-sm-4 control-label']) }}
                                     <div class="col-sm-8">
                                         {{ Form::text('Nsurname', '', ['class' => 'form-control','id' => 'inputEmail3','placeholder' =>'SURNAME','required' => 'required']) }}
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
-                                    {{ Form::label('Nfirstname', 'First-NAME:', ['class' => 'col-sm-4 control-label']) }}
+                                    {{ Form::label('Nfirstname', 'First-name:', ['class' => 'col-sm-4 control-label']) }}
                                     <div class="col-sm-8">
-                                        {{ Form::text('Nfirstname', '', ['class' => 'form-control','id' => 'inputEmail3','placeholder' =>'First NAME','required' => 'required']) }}
+                                        {{ Form::text('Nfirstname', '', ['class' => 'form-control','id' => 'inputEmail3','placeholder' =>'First-name','required' => 'required']) }}
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
-                                    {{ Form::label('Nothername', 'OTHER-NAME:', ['class' => 'col-sm-4 control-label']) }}
+                                    {{ Form::label('Nothername', 'Other-name:', ['class' => 'col-sm-4 control-label']) }}
                                     <div class="col-sm-8">
                                         {{ Form::text('Nothername', '', ['class' => 'form-control','id' => 'inputEmail3','placeholder' =>'OTHER NAME','required' => 'required']) }}
                                     </div>

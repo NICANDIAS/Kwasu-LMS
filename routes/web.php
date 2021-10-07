@@ -34,7 +34,7 @@ Route::group(['middleware' => 'App\Http\Middleware\lecturerHodProvostMiddleware'
 
 //HOD and Provost
 
-//HOD, Provost and Registry
+//HOD, Provost, Registry, and VC
 Route::group(['middleware' => 'App\Http\Middleware\HodProvostRegistryMiddleware'], function() {
     Route::match(['post','get'], 'applied', 'LeaveController@applied');
     Route::match(['post','get'], 'approval/{id}', 'LeaveController@approval');
@@ -88,5 +88,6 @@ Route::match(['post','get'], 'profile', 'profileController@index');
 Route::match(['post','get'], 'profile/{staff_id}', 'profileController@edit');
 
 Route::match(['post','get'], 'editApplication/{id}/', 'LeaveController@edit');
+Route::match(['post','get'], 'deleteApplication/{id}/', 'LeaveController@destroy');
 
 return Activity::all();

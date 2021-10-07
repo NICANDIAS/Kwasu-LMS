@@ -60,11 +60,25 @@
                             {{ Form::label('registryRemark', 'REGISTRY REMARK :',['class' => 'col-sm-3 col-form-label']) }} 
                             @if (Auth::user()->user_access_id == '4')  
                                 <div class="col-sm-8">
-                                    {{ Form::textarea('registryRemark', $all_l->provost_remark, ['class' => 'form-control','placeholder' =>'REGISTRY REMARK', 'row' => '4', 'cols' => '30', 'required' => 'required']) }}
+                                    {{ Form::textarea('registryRemark', $all_l->registry_remark, ['class' => 'form-control','placeholder' =>'REGISTRY REMARK', 'row' => '4', 'cols' => '30', 'required' => 'required']) }}
                                 </div>
                             @elseif(in_array(Auth::user()->user_access_id, array('5','100')))
                                 <div class="col-sm-8">
                                     {{ Form::textarea('registryRemark', $all_l->registry_remark, ['class' => 'form-control','placeholder' =>'REGISTRY REMARK', 'row' => '4', 'cols' => '30', 'required' => 'required','readonly']) }}
+                                </div>
+                            @endif
+                        </div>
+                    @endif
+                    @if (in_array(Auth::user()->user_access_id, array('5')))
+                        <div class="form-group row">
+                            {{ Form::label('vcRemark', 'VC REMARK :',['class' => 'col-sm-3 col-form-label']) }} 
+                            @if (Auth::user()->user_access_id == '5')  
+                                <div class="col-sm-8">
+                                    {{ Form::textarea('registryRemark', $all_l->vc_remark, ['class' => 'form-control','placeholder' =>'VC REMARK', 'row' => '4', 'cols' => '30', 'required' => 'required']) }}
+                                </div>
+                            @elseif(in_array(Auth::user()->user_access_id, array('5','100')))
+                                <div class="col-sm-8">
+                                    {{ Form::textarea('registryRemark', $all_l->vc_remark, ['class' => 'form-control','placeholder' =>'VC REMARK', 'row' => '4', 'cols' => '30', 'required' => 'required','readonly']) }}
                                 </div>
                             @endif
                         </div>
@@ -76,23 +90,23 @@
                                 {{ Form::submit('HOD RECOMMEND', array('name' => 'submitButton','class'=>'btn btn-sm btn-primary m-t-n-xs')) }} |
                                 {{ Form::submit('HOD DO NOT RECOMMEND', array('name' => 'submitButton','class'=>'btn btn-sm btn-primary m-t-n-xs')) }}
                             @elseif (in_array($all_l->application_status, array('HOD has approved','PROVOST has approved')))
-                                {{"APPROVED"}}
+                                {{"HOD HAS RECOMMEND"}}
                             @elseif ($all_l->application_status == 'HOD has declined')
-                                {{"DECLINED"}}
+                                {{"HOD DO NOT RECOMMEND"}}
                             @endif
                         @endif
                         <br>
                         @if (Auth::user()->user_access_id == '3' or Auth::user()->user_access_id == '100')
                             @if ($all_l->application_status == 'Applied')
                                 {{ "Awiating HOD's approval" }}
-                            @elseif ($all_l->application_status == 'HOD has Approved')
+                            @elseif ($all_l->application_status == 'HOD has Recommend')
                                 {{"HOD HAS APPROVED"}}<br><br>
                                 {{ Form::submit('PROVOST RECOMMEND', array('name' => 'submitButton','class'=>'btn btn-sm btn-primary m-t-n-xs')) }} |
                                 {{ Form::submit('PROVOST DO NOT RECOMMEND', array('name' => 'submitButton','class'=>'btn btn-sm btn-primary m-t-n-xs')) }}
-                            @elseif ($all_l->application_status == 'PROVOST has approved')
-                                {{"APPROVED"}}
+                            @elseif ($all_l->application_status == 'PROVOST has Recommend')
+                                {{"PROVOST HAS APPROVED"}}
                             @elseif ($all_l->application_status == 'PROVOST has declined')
-                                {{"DECLINED"}}
+                                {{"PROVOST HAS DECLINED"}}
                             @endif
                         @endif
                         <br>
@@ -101,32 +115,32 @@
                                 {{ "Awiating HOD's approval" }}
                             @elseif ($all_l->application_status == 'HOD has approved')
                                 {{ "Awiating PROVOST Recommendation" }}
-                            @elseif ($all_l->application_status == 'PROVOST has approved')
+                            @elseif ($all_l->application_status == 'PROVOST has Recommend')
                                 {{"PROVOST HAS APPROVED"}}<br><br>
                                 {{ Form::submit('REGISTRY APPROVE', array('name' => 'submitButton','class'=>'btn btn-sm btn-primary m-t-n-xs')) }} |
                                 {{ Form::submit('REGISTRY DECLINE', array('name' => 'submitButton','class'=>'btn btn-sm btn-primary m-t-n-xs')) }}
                             @elseif ($all_l->application_status == 'REGISTRY has approved')
-                                {{"APPROVED"}}
+                                {{"REGISTRY HAS APPROVED"}}
                             @elseif ($all_l->application_status == 'REGISTRY has declined')
-                                {{"DECLINED"}}
+                                {{"REGISTRY HAS DECLINED"}}
                             @endif
                         @endif
                         <br>
                         @if (Auth::user()->user_access_id == '5' or Auth::user()->user_access_id == '100')
                             @if ($all_l->application_status == 'Applied')
                                 {{ "Awiating HOD's Recommendation" }}
-                            @elseif ($all_l->application_status == 'HOD has approved')
+                            @elseif ($all_l->application_status == 'HOD has Recommend')
                                 {{ "Awiating PROVOST Recommendation" }}
-                            @elseif ($all_l->application_status == 'PROVOST has approved')
+                            @elseif ($all_l->application_status == 'PROVOST has Recommend')
                                 {{ "Awiating REGISTRY Recommendation" }}
                             @elseif($all_l->application_status == 'REGISTRY has approved')
                                 {{"REGISTRY HAS APPROVED"}}<br><br>
                                 {{ Form::submit('VC APPROVE', array('name' => 'submitButton','class'=>'btn btn-sm btn-primary m-t-n-xs')) }} |
                                 {{ Form::submit('VC DECLINE', array('name' => 'submitButton','class'=>'btn btn-sm btn-primary m-t-n-xs')) }}
                             @elseif ($all_l->application_status == 'VC has approved')
-                                {{"APPROVED"}}
+                                {{"VC HAS APPROVED"}}
                             @elseif ($all_l->application_status == 'VC has declined')
-                                {{"DECLINED"}}
+                                {{"VC HAS DECLINED"}}
                             @endif
                         @endif
                         <br>
