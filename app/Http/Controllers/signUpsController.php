@@ -32,6 +32,7 @@ class signUpsController extends Controller
     public function create(Request $request)
     {
         $user = Auth::user()->name;
+        dd($user);
 
         if($request->isMethod('POST')){
             if(Employee::where('staff_id','=', $user)->first()) {
@@ -81,11 +82,12 @@ class signUpsController extends Controller
             }
         }
         $faculty = Faculty::pluck('faculty','id');
+        dd($faculty);
         $department = Department::where('faculty_id',$request->id)->pluck('department','id')->take(100);
         $unit = Unit::pluck('unit','unit');
 
         return view ('leave.signUp', ['user' => $user, 'unit' => $unit, 'faculty' => $faculty, 'department'=>$department]);
-        return json_encode($department);
+       // return json_encode($department);
     }
 
     /**
