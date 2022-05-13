@@ -86,7 +86,10 @@ class signUpsController extends Controller
         $department = Department::where('faculty_id',$request->id)->pluck('department','id')->take(100);
         $unit = Unit::pluck('unit','unit');
 
-        return view ('leave.signUp', ['user' => $user, 'unit' => $unit, 'faculty' => $faculty, 'department'=>$department]);
+        return view ('leave.signUp', ['user' => $user, 
+                                        'unit' => $unit, 
+                                        'faculty' => $faculty, 
+                                        'department'=>$department]);
        // return json_encode($department);
     }
 

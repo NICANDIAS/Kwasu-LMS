@@ -72,6 +72,7 @@
                                     @endif
                                 </td>
                                 <td>
+                                    <!-- Hod approval box -->
                                     @if (in_array($allLeave->application_status, array('Applied','HOD has declined')))
                                         <a class="fa fa-times-circle fa-3x"></a>
                                     @elseif (in_array($allLeave->application_status, array('HOD has Recommend','PROVOST has Recommend','REGISTRY has approved','REGISTRY has declined','VC has approved')))
@@ -79,9 +80,10 @@
                                     @endif
                                 </td>
                                 <td>
+                                    <!-- Provost approval box -->
                                     @if (App\Models\Employee::whereStaff_id($allLeave->staff_id)->pluck('employee_category')->first() == 'Non-Teaching')
                                         {{ "Not aplicable"}}
-                                    @elseif (App\Models\Employee::whereStaff_id($allLeave->staff_id)->pluck('employee_category')->first() == 'teaching')
+                                    @elseif (App\Models\Employee::whereStaff_id($allLeave->staff_id)->pluck('employee_category')->first() == 'Teaching')
                                         @if (in_array($allLeave->application_status, array('Applied','HOD has Approved','HOD has declined')))
                                             <a class="fa fa-times-circle fa-3x"></a>
                                         @elseif (in_array($allLeave->application_status, array('PROVOST has approved','REGISTRY has approved','REGISTRY has declined')))
@@ -90,6 +92,7 @@
                                     @endif 
                                 </td>
                                 <td>
+                                    <!-- Registry approval box -->
                                     @if (in_array($allLeave->application_status, array('Applied','HOD has Approved','HOD has declined','PROVOST has approved','PROVOST has declined','REGISTRY has declined')))
                                         <a class="fa fa-times-circle fa-3x"></a>
                                     @elseif (in_array($allLeave->application_status, array('REGISTRY has approved','VC has approved')))
@@ -97,6 +100,7 @@
                                     @endif
                                 </td>
                                 <td>
+                                    <!-- VC apporval box -->
                                     @if (in_array($allLeave->application_status, array('Applied','HOD has Recommend','HOD has declined','PROVOST has approved','PROVOST has declined','REGISTRY has approved','REGISTRY has declined','VC has decline')))
                                         <a class="fa fa-times-circle fa-3x"></a>
                                     @elseif ($allLeave->application_status == 'VC has approved')

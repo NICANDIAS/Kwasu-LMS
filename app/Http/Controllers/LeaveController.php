@@ -35,6 +35,7 @@ class LeaveController extends Controller
         $sharedDays = allLeave::where('staff_id',$user)
                                 ->where('application_status','Applied')->pluck('shared_days')->first();
         $department = Employee::where('staff_id','=',$user)->pluck("department")->first();
+        $unit = Employee::where('staff_id','=',$user)->pluck("unit")->first();
         $holidays= Holiday::all()->pluck('start_date')->toArray();
 
         //Removing weekends and holidays from the leave days
@@ -56,7 +57,8 @@ class LeaveController extends Controller
             if($request->isMethod('POST')){
                 $all_leave = new allLeave;
                 $all_leave->staff_id = $user;
-                $all_leave->department = $department;
+                $all_leave->department = $department;                        
+                $all_leave->unit = $unit;
                 $all_leave->leave_type = $request->input('leaveType');
                 $all_leave->shared_leave = $request->input('sharedLeave');
                 $all_leave->start_date = $request->input('dateFrom');
@@ -83,6 +85,7 @@ class LeaveController extends Controller
                         $all_leave = new allLeave;
                         $all_leave->staff_id = $user;
                         $all_leave->department = $department;
+                        $all_leave->unit = $unit;
                         $all_leave->leave_type = $request->input('leaveType');
                         $all_leave->shared_leave = $request->input('sharedLeave');
                         $all_leave->start_date = $request->input('dateFrom');
@@ -103,6 +106,7 @@ class LeaveController extends Controller
                         $all_leave = new allLeave;
                         $all_leave->staff_id = $user;
                         $all_leave->department = $department;
+                        $all_leave->unit = $unit;
                         $all_leave->leave_type = $request->input('leaveType');
                         $all_leave->shared_leave = $request->input('sharedLeave');
                         $all_leave->start_date = $request->input('dateFrom');

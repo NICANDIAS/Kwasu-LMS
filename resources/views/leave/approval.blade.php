@@ -98,7 +98,7 @@
                         <br>
                         @if (Auth::user()->user_access_id == '3' or Auth::user()->user_access_id == '100')
                             @if ($all_l->application_status == 'Applied')
-                                {{ "Awiating HOD's approval" }}
+                                {{ "Awiating HOD's Recommendation" }}
                             @elseif ($all_l->application_status == 'HOD has Recommend')
                                 {{"HOD HAS APPROVED"}}<br><br>
                                 {{ Form::submit('PROVOST RECOMMEND', array('name' => 'submitButton','class'=>'btn btn-sm btn-primary m-t-n-xs')) }} |
@@ -112,7 +112,7 @@
                         <br>
                         @if (Auth::user()->user_access_id == '4' or Auth::user()->user_access_id == '100')
                             @if ($all_l->application_status == 'Applied')
-                                {{ "Awiating HOD's approval" }}
+                                {{ "Awiating HOD's Recommendation" }}
                             @elseif ($all_l->application_status == 'HOD has approved')
                                 {{ "Awiating PROVOST Recommendation" }}
                             @elseif ($all_l->application_status == 'PROVOST has Recommend')
