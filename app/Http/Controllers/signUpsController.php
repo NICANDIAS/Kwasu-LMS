@@ -29,10 +29,8 @@ class signUpsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
-    {
+    public function create(Request $request){
         $user = Auth::user()->name;
-        dd($user);
 
         if($request->isMethod('POST')){
             if(Employee::where('staff_id','=', $user)->first()) {
@@ -82,7 +80,6 @@ class signUpsController extends Controller
             }
         }
         $faculty = Faculty::pluck('faculty','id');
-        dd($faculty);
         $department = Department::where('faculty_id',$request->id)->pluck('department','id')->take(100);
         $unit = Unit::pluck('unit','unit');
 
@@ -90,7 +87,7 @@ class signUpsController extends Controller
                                         'unit' => $unit, 
                                         'faculty' => $faculty, 
                                         'department'=>$department]);
-       // return json_encode($department);
+        return json_encode($department);
     }
 
     /**
@@ -110,8 +107,7 @@ class signUpsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
-    {
+    public function show(Request $request){
         //view applicant details 
         if($request->isMethod('POST')){
             $empSearch = $request->input('search');

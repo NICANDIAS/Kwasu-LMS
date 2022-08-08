@@ -22,8 +22,7 @@ class LeaveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $user = Auth::user()->name;
         $userExist = allLeave::where('staff_id',$user)->first();
         $approvalCheck = allLeave::orderBy('created_at', 'DESC')->where('staff_id',$user)->pluck('application_status')->first();
