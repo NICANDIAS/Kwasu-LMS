@@ -1,4 +1,6 @@
-Description: A Full-Stack Laravel Leave Management System. Leave Management System is a web application for managing employee leaves. This application provides all the stages and phases of leave management from the application to all levels(HOD, Dean, Registrar and the VC) of approval that any employee needs. Through this application one can easily manage leaves.
+A Full-Stack Laravel Leave Management System
+
+Description: Leave Management System is a web application for managing employee leaves. This application provides all the stages and phases of leave management from the application to all levels(HOD, Dean, Registrar and the VC) of approval that any employee needs. Through this application one can easily manage leaves.
 
 Installation:
 
