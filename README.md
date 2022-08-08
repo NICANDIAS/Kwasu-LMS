@@ -3,13 +3,13 @@ Description: A Full-Stack Laravel Leave Management System. Leave Management Syst
 Installation:
 
 1. Install Laravel 8
-2. change the .env file settings to
+2. change the following fields in .env file settings to
     1. DB_CONNECTION=mysql
-       DB_HOST=127.0.0.1
-       DB_PORT=8889
-       DB_DATABASE=Kwasu-LMS
-       DB_USERNAME=root
-       DB_PASSWORD=root
+    2. DB_HOST=127.0.0.1
+    3. DB_PORT=8889
+    4. DB_DATABASE=Kwasu-LMS
+    5. DB_USERNAME=root
+    6. DB_PASSWORD=root
 3. Create a database called Kwasu-LMS
 4. Run (php artisan migrate) In the project terminal to create all the necessary tables in the database created earlier (Kwasu-LMS)
 5. Run (php artisan serve) to run the project
