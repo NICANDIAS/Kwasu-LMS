@@ -64,20 +64,20 @@
                                         <div class="col-lg-4">
                                             {{ Form::label('faculty', 'Faculty:',['class' => 'col-sm-4 control-label']) }}   
                                             <div class="col-sm-8">
-                                                {{ Form::select('faculty', ['Select Faculty'] , '',['class' => 'form-control m-b', 'id' => 'faculty']) }}
+                                                {{ Form::select('faculty', ['Select Faculty'], '',['class' => 'form-control m-b', 'id' => 'faculty']) }}
                                             </div>
                                             {{-- <p id="demo"></p> --}}
                                         </div>
                                         <div class="col-lg-4">
                                             {{ Form::label('department', 'Department:',['class' => 'col-sm-4 control-label']) }}   
                                             <div class="col-sm-8">
-                                                {{ Form::select('department', ['Select Department'] , '', ['class' => 'form-control m-b', 'id' => 'department']) }}
+                                                {{ Form::select('department', ['Select Department'], '', ['class' => 'form-control m-b', 'id' => 'department']) }}
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             {{ Form::label('unit', 'Unit:',['class' => 'col-sm-4 control-label']) }}   
                                             <div class="col-sm-8">
-                                                {{ Form::select('unit',['Select Unit'] ,'', ['class' => 'form-control m-b']) }}
+                                                {{ Form::select('unit',['Select Unit'],'', ['class' => 'form-control m-b']) }}
                                             </div>
                                         </div>
                                     </div>
